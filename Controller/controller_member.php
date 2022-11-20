@@ -18,10 +18,10 @@
         if($_POST['user'] == 'admin' && $_POST['pass']== 'admin') {
             $_SESSION['login'] = "admin";
             header("Location:../admin.php");
-        }
+        } 
         else {
             $sql = "SELECT * FROM `member` 
-            WHERE (user = '".$_POST['user']."' or email = '" .$_POST['user']. "') and pass = '".$_POST['pass']."' ";
+            WHERE (user = '".$_POST['user']."' or email = '" .$_POST['user']. "') and pass = '".$_POST['pass']."' and status = 1 ";
             
             $result = $conn->query($sql);
             
