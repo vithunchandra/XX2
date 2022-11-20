@@ -96,6 +96,10 @@
                 var filmID = document.getElementById("filmID").value;
                 var broadcast = document.getElementById("broadcast").value;
                 var session = document.getElementById("session").value;
+                document.getElementById("filmName").value = "";
+                document.getElementById("filmID").value = "";
+                document.getElementById("broadcast").value = "";
+                document.getElementById("session").value = "";
                 var data = `filmID=${filmID}&broadcast=${broadcast}&session=${session}`;
                 var crudObject = new CrudObject("insertIntoSchedule.php", data);
                 var ajaxContainer = document.getElementById("messageContainer");
