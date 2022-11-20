@@ -14,6 +14,7 @@
     $counter = 0;
     while($row = mysqli_fetch_assoc($temp_genre)) {
       $genre[$counter] = $row['gen'];
+      $counter +=1;
     }
   }
   else {
@@ -32,7 +33,7 @@
 <body>
   <button><a href = "index.php">Back</a></button>  
   <hr>
-  
+
   <div id="poster">
     <img width="256px" height="256px" src= <?="'Gambar/".$movie['image_path']."'"?> alt="">
   </div>
