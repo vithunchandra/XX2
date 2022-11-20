@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 20, 2022 at 09:25 AM
+-- Generation Time: Nov 20, 2022 at 01:59 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -50,8 +50,16 @@ CREATE TABLE `film` (
   `image_path` varchar(255) DEFAULT NULL,
   `trailer_link` varchar(255) DEFAULT NULL,
   `start_date` date DEFAULT NULL,
-  `end_date` date DEFAULT NULL
+  `end_date` date DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `film`
+--
+
+INSERT INTO `film` (`id_film`, `nama_film`, `sinopsis`, `image_path`, `trailer_link`, `start_date`, `end_date`, `status`) VALUES
+(4, 'Yuru Camp the Movie', 'The anime film will feature the familiar characters from the franchise now grown up, and reuniting to construct a campsite.', 'placeholder.jpg', 'https://www.youtube.com/watch?v=1GnPdVAJm5U', '2022-11-02', '2022-11-30', 1);
 
 -- --------------------------------------------------------
 
@@ -60,9 +68,19 @@ CREATE TABLE `film` (
 --
 
 CREATE TABLE `film_genre` (
+  `film_genre_id` int(11) NOT NULL,
   `id_genre` int(11) NOT NULL,
   `id_film` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `film_genre`
+--
+
+INSERT INTO `film_genre` (`film_genre_id`, `id_genre`, `id_film`) VALUES
+(1, 3, 4),
+(2, 4, 4),
+(3, 5, 4);
 
 -- --------------------------------------------------------
 
@@ -148,8 +166,16 @@ CREATE TABLE `schedule` (
   `id_schedule` int(11) NOT NULL,
   `id_film` int(11) DEFAULT NULL,
   `broadcast_date` date DEFAULT NULL,
-  `id_session` int(11) DEFAULT NULL
+  `id_session` int(11) DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `schedule`
+--
+
+INSERT INTO `schedule` (`id_schedule`, `id_film`, `broadcast_date`, `id_session`, `status`) VALUES
+(2, 4, '2022-11-01', 3, 1);
 
 -- --------------------------------------------------------
 
@@ -210,7 +236,7 @@ ALTER TABLE `film`
 -- Indexes for table `film_genre`
 --
 ALTER TABLE `film_genre`
-  ADD PRIMARY KEY (`id_genre`,`id_film`),
+  ADD PRIMARY KEY (`film_genre_id`),
   ADD KEY `id_film` (`id_film`);
 
 --
@@ -275,7 +301,13 @@ ALTER TABLE `d_movie`
 -- AUTO_INCREMENT for table `film`
 --
 ALTER TABLE `film`
-  MODIFY `id_film` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_film` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `film_genre`
+--
+ALTER TABLE `film_genre`
+  MODIFY `film_genre_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `genre`
@@ -305,7 +337,7 @@ ALTER TABLE `point_request`
 -- AUTO_INCREMENT for table `schedule`
 --
 ALTER TABLE `schedule`
-  MODIFY `id_schedule` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_schedule` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `session`
@@ -333,7 +365,6 @@ ALTER TABLE `d_movie`
 -- Constraints for table `film_genre`
 --
 ALTER TABLE `film_genre`
-  ADD CONSTRAINT `film_genre_ibfk_1` FOREIGN KEY (`id_genre`) REFERENCES `genre` (`id_genre`),
   ADD CONSTRAINT `film_genre_ibfk_2` FOREIGN KEY (`id_film`) REFERENCES `film` (`id_film`);
 
 --
