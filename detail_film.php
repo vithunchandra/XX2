@@ -16,6 +16,15 @@
       $genre[$counter] = $row['gen'];
       $counter +=1;
     }
+
+    if(isset($_POST['order'])) {
+      if(isset($_SESSION['login'])) {
+        header('Location:order.php?id=' . $_GET['id']);
+      } else {
+        header("Location:login.php?err='Anda harus login terlebih dahulu'");
+      }
+    }
+
   }
   else {
     header("Location:index.php");
@@ -56,6 +65,10 @@
   <div id="trailer">
     <a href=<?= "'".$movie['trailer_link']."'" ?>>trailer!</a>
   </div>
+
+  <form action=<?= "'detail_film.php?id=".$_GET['id']."'" ?> method = "POST">
+    <button type="submit" name = "order">Buy Ticket!</button>
+  </form>
   
 </body>
 </html>

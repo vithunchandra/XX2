@@ -9,7 +9,7 @@
       header("Location:admin.php");
     }
     else {
-      header("Location:user.php");
+      header("Location:index.php");
     }
   }
 ?>

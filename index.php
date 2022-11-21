@@ -13,7 +13,14 @@
 <body>
   <button onclick = "now_playing()" >Now Playing</button>
   <button onclick = "upcoming()" >Upcoming</button>
-  <button><a href = "login.php">Login</a></button>
+  <?php 
+    if(isset($_SESSION['login'])) {
+      echo '<form action = "Controller/controller_member.php" method = "POST"><button name = "logout" type = "submit">logout</button></form>';
+    } else {
+      echo '<button><a href = "login.php">Login</a></button>';
+    }
+  ?>
+  
   <hr>
 
   <h1 id = 'title'>Title</h1>

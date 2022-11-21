@@ -29,7 +29,7 @@
             while($row = mysqli_fetch_assoc($result)) {
                 $_SESSION['login'] = $row;
                 $counter = $counter + 1;
-                header("Location:../user.php");
+                header("Location:../index.php");
             }
             if($counter == 0) {
                 header("Location:../login.php?err='Pastikan Username dan Password Sudah Benar'");
