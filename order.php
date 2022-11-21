@@ -9,8 +9,9 @@
 
       $sql_option = "Select id_theater,nama_theater from theater where 1";
       $option_list = $conn->query($sql_option);
-
+      
       echo "<script>var movieNow = ".$_GET['id']."</script>";
+      echo "<script>var userNow = ".$_SESSION['login']['id_member']."</script>";
     } else {
       header("Location:login.php?err='Anda harus login terlebih dahulu'");
     }
@@ -141,18 +142,20 @@
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-          var responseText = xhttp.responseText;
+          var responseText = xhttp.responseText;    
+          
           var seatRep = JSON.parse(responseText);
           seat = seatRep;
 
           var tempHTML = "";
           for(var i = 0;i < seat.length;i++) {
             for(var j = 0;j < seat[i].length;j++) {
-              tempHTML = tempHTML + "<button onclick = 'choose_seat(this)' value = '"+i+";"+j+"'>1</button>";
+              tempHTML = tempHTML + "<button onclick = 'choose_seat(this)' value = '"+i+";"+j+"'>"+seat[i][j]+"</button>";
             }
             tempHTML = tempHTML + "<br>";
           }
           document.getElementById('av_seat').innerHTML = tempHTML;
+          
         }
     };
     xhttp.open("GET", "Controller/controller_theater.php?get_seat=1&theater="+theater+"&tanggal='"+tanngal+"'&film="+movieNow + "&sesi=" + sesi  );
@@ -181,7 +184,7 @@
           console.log(xhttp.responseText);
         }
     };
-    xhttp.open("GET", "Controller/controller_theater.php?buy=1&seat="+JSON.stringify(choosen_seat)+"&theater="+theater + "&tanggal='"+tanngal+"'&film="+movieNow + "&sesi=" + sesi  );
+    xhttp.open("GET", "Controller/controller_theater.php?buy=1&seat="+JSON.stringify(choosen_seat)+"&theater="+theater + "&tanggal='"+tanngal+"'&film="+movieNow + "&sesi=" + sesi + "&user=" + userNow  );
     xhttp.send();
   }
 
