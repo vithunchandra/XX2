@@ -80,7 +80,7 @@
 
             function updateFilm(){
                 var ajaxContainer = document.getElementById("filmContainer");
-                var fetchObject = new FetchObject("fetchfilmtochoose.php", ajaxContainer, bindFilmChoose);
+                var fetchObject = new FetchObject("Ajax_Folder/fetchfilmtochoose.php", ajaxContainer, bindFilmChoose);
 
                 fetch(fetchObject);
             }
@@ -101,28 +101,49 @@
                 document.getElementById("broadcast").value = "";
                 document.getElementById("session").value = "";
                 var data = `filmID=${filmID}&broadcast=${broadcast}&session=${session}`;
-                var crudObject = new CrudObject("insertIntoSchedule.php", data);
+                var crudObject = new CrudObject("Ajax_Folder/insertIntoSchedule.php", data);
                 var ajaxContainer = document.getElementById("messageContainer");
                 crud(crudObject, updateSchedule, ajaxContainer);
             }
 
             function updateSchedule(){
                 var ajaxContainer = document.getElementById("schedulContainer");
-                var fetchObject = new FetchObject("fetchschedule.php", ajaxContainer, bindSchedule);
+                var fetchObject = new FetchObject("Ajax_Folder/fetchschedule.php", ajaxContainer, bindSchedule);
 
                 fetch(fetchObject, bindSchedule);
             }
 
             function bindSchedule(){
-                listDelete = document.querySelectorAll(".deleteSchedule");
+                var listDelete = document.querySelectorAll(".deleteSchedule");
                 for(var i=0; i<listDelete.length; i++){
                     listDelete[i].addEventListener("click", deleteSchedule);
                 }
+
+                var listCheckBox = document.querySelectorAll(".theater");
+                for(var i=0; i<listCheckBox.length; i++){
+                    listCheckBox[i].addEventListener("change", selectTheatre);
+                    var rawData = listCheckBox[i].value.split("-");
+                    var status = rawData[2];
+                    if(status == 1){
+                        listCheckBox[i].checked = true;
+                    }else{
+                        listCheckBox[i].checked = false;
+                    }
+                }
+            }
+
+            function selectTheatre(){
+                var rawData = this.value.split("-");
+                var theaterID = rawData[0];
+                var scheduleID = rawData[1];
+                var data = `theaterID=${theaterID}&scheduleID=${scheduleID}`;
+                var crudObject = new CrudObject("Ajax_Folder/theatercheckbox.php", data);
+                crud(crudObject);
             }
 
             function deleteSchedule(){
                 var data = `scheduleID=${this.value}`;
-                var crudObject = new CrudObject("deleteschedule.php", data);
+                var crudObject = new CrudObject("Ajax_Folder/deleteschedule.php", data);
                 crud(crudObject, updateSchedule);
             }
 

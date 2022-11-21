@@ -1,5 +1,5 @@
 <?php
-    require "functions.php";
+    require "../Controller/functions.php";
 
     $scheduleID = $_POST['scheduleID'];
 

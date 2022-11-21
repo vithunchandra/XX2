@@ -1,5 +1,5 @@
 <?php 
-    require "functions.php";
+    require "../Controller/functions.php";
 
     $filmData = fetchData("SELECT id_film as id, nama_film AS nama, sinopsis, image_path AS image, trailer_link AS trailer, 
     start_date AS start, end_date AS end, status FROM film");
@@ -40,7 +40,7 @@
                 <td><?= $film['trailer'] ?></td>
                 <td><?= $film['sinopsis'] ?></td>
                 <td>
-                    <button class="deleteFilm" value="<?= $film['id'] ?>">Deactivate</button>
+                    <button class="chooseFilm" value="<?= $film['id']."-".$film['nama'] ?>">Pick</button>
                 </td>
             </tr>
         <?php $counter++; } ?>

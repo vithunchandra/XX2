@@ -1,5 +1,5 @@
 <?php
-    require "functions.php";
+    require "../Controller/functions.php";
 
     $nama = $_POST['nama'];
     $mulai = toDate($_POST['mulai']);

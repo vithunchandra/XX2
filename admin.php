@@ -42,7 +42,7 @@
 
             function updateUser(){
                 var ajaxcontainer = document.getElementById("userContainer");
-                var fetchObject = new FetchObject("fetchuser.php", ajaxcontainer, bindUserDelete);
+                var fetchObject = new FetchObject("Ajax_Folder/fetchuser.php", ajaxcontainer, bindUserDelete);
                 fetch(fetchObject);
             }
 
@@ -55,7 +55,7 @@
 
             function deleteUser(){
                 var data = `userID=${this.value}`;
-                var crudObject = new CrudObject("deleteuser.php", data);
+                var crudObject = new CrudObject("Ajax_Folder/deleteuser.php", data);
                 
                 crud(crudObject, updateUser);
             }

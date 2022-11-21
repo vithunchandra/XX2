@@ -1,5 +1,5 @@
 <?php
-    require "functions.php";
+    require "../Controller/functions.php";
 
     $userData = fetchData("SELECT * FROM member");
 ?>

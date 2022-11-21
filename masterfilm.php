@@ -76,13 +76,13 @@
                 document.getElementById("trailer").value = "";
                 document.getElementById("sinopsis").value = "";
                 var data = `nama=${nama}&mulai=${mulai}&akhir=${akhir}&gambar=${gambar}&trailer=${trailer}&sinopsis=${sinopsis}&genre=${JSON.stringify(genre)}`;
-                var crudObject = new CrudObject("insertintofilm.php", data);
+                var crudObject = new CrudObject("Ajax_Folder/insertintofilm.php", data);
                 crud(crudObject, updateFilm);
             }
 
             function updateFilm(){
                 var ajaxContainer = document.getElementById("filmContainer");
-                var fetchObject = new FetchObject("fetchfilm.php", ajaxContainer, bindFilmDelete);
+                var fetchObject = new FetchObject("Ajax_Folder/fetchfilm.php", ajaxContainer, bindFilmDelete);
 
                 fetch(fetchObject);
             }
@@ -96,7 +96,7 @@
 
             function deleteFilm(){
                 var data = `id_film=${this.value}`;
-                crudObject = new CrudObject("deletefilm.php", data);
+                crudObject = new CrudObject("Ajax_Folder/deletefilm.php", data);
                 crud(crudObject, updateFilm);
             }
 

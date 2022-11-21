@@ -1,5 +1,5 @@
 <?php 
-    require "Controller/connect.php";
+    require "../Controller/connect.php";
     
     function fetchData($query){
         global $conn;

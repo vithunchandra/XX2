@@ -1,5 +1,5 @@
 <?php
-    require "functions.php";
+    require "../Controller/functions.php";
 
     $scheduleData = fetchData("SELECT s.id_schedule AS id, f.nama_film AS nama, s.broadcast_date AS date, se.session_start AS start, se.session_end AS end, 
     s.status AS status, f.image_path AS gambar FROM schedule s JOIN film f ON f.id_film = s.id_film JOIN session se ON se.id_session = s.id_session");
@@ -12,6 +12,7 @@
     <th>Broadcast Date</th>
     <th>Start</th>
     <th>End</th>
+    <th>Theatre</th>
     <th>Action</th>
 </tr>
 <?php
@@ -25,6 +26,16 @@
                 <td><?= $schedule['date'] ?></td>
                 <td><?= $schedule['start'] ?></td>
                 <td><?= $schedule['end'] ?></td>
+                <td>
+                    Theatre : <br>
+                    <?php
+                        $theaterID = 1;
+                        $scheduleID = $schedule['id'];
+                        $theater = fetchData("SELECT * FROM theater_schedule WHERE id_schedule = '$scheduleID'");
+                        foreach($theater as $value){ ?>
+                            <input type="checkbox" class="theater" value="<?= $theaterID ?>-<?= $schedule['id'] ?>-<?= $value['status'] ?>"> Theater <?= $theaterID ?> <br>
+                        <?php $theaterID++;} ?>
+                </td>
                 <td>
                     <button class="deleteSchedule" value=<?= $schedule['id'] ?>>Deactivate</button> <br>
                     <button class="updateSchedule" value=<?= $schedule['id'] ?>>Update</button>

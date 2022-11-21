@@ -1,6 +1,6 @@
 <?php 
-    require "functions.php";
-
+    require "../Controller/functions.php";
+    
     $filmID = $_POST['filmID'];
     $broadcast = $_POST['broadcast'];
     $session = $_POST['session'];
@@ -12,6 +12,12 @@
     if($inRange){
         if(empty($isExist)){
             crud("INSERT INTO schedule(id_film, broadcast_date, id_session) VALUES('$filmID', '$broadcast', '$session')");
+            $lastScheduleID = fetchData("SELECT id_schedule AS id FROM schedule ORDER BY id DESC LIMIT 1")[0]['id'];
+            $totalTheater = fetchData("SELECT COUNT(*) AS total FROM theater")[0]['total'];
+            for($i=0; $i<$totalTheater; $i++){
+                $theaterID = $i + 1;
+                crud("INSERT INTO theater_schedule(id_theater, id_schedule) VALUES('$theaterID', '$lastScheduleID')");
+            }
         }else{
             $message = "Schedule dengan data diatas sudah pernah terdaftar";
         }
