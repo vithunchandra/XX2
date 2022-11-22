@@ -9,10 +9,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link rel="stylesheet" href="bootstrap-5.2.1-dist/css/bootstrap.css">
+
+  <style>
+    form {
+        display: inline;
+    }
+  </style>
 </head>
 <body>
   <button onclick = "now_playing()" >Now Playing</button>
   <button onclick = "upcoming()" >Upcoming</button>
+  <button ><a href = 'theater_schedule.php'>See Theater</a></button>
   <?php 
     if(isset($_SESSION['login'])) {
       echo '<form action = "Controller/controller_member.php" method = "POST"><button name = "logout" type = "submit">logout</button></form>';
@@ -21,7 +28,7 @@
     }
   ?>
   <hr>
-    <h5>Advanced Search</h5>
+    <h5>Search</h5>
     <label>Title : </label> 
     <input id = 'search_key' type="text"> <br>
 
@@ -108,5 +115,8 @@
     xhttp.send();
   }
 
+
   now_playing();
+
+
 </script>

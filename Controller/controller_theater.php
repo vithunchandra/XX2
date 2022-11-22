@@ -86,4 +86,10 @@
       
     }
 
+    if(isset($_GET['get_search_prop'])) {
+
+      $result['theater'] = fetch('select id_theater,nama_theater from theater');
+      $result['session'] = fetch('select * from session');
+      echo json_encode($result);
+    } 
 ?>
