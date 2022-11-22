@@ -12,6 +12,14 @@
         return $data;
     }
 
+    function fetchScalar($query){
+        global $conn;
+        $rawData = $conn->query($query);
+        $data = mysqli_fetch_column($rawData);
+
+        return $data;
+    }
+
     function crud($query){
         global $conn;
 
@@ -23,4 +31,5 @@
     function toDate($rawDate){
         return date("Y-m-d", strtotime($rawDate));
     }
+
 ?>

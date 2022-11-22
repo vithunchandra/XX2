@@ -23,7 +23,8 @@
                 <td><?= $value['email'] ?></td>
                 <td><?= $value['saldo'] ?></td>
                 <td>
-                    <button class="deleteUser" value="<?= $value['id_member'] ?>">Deactivate</button>
+                    <button class="deleteUser" value="<?= $value['id_member'] ?>">Deactivate</button> <br>
+                    <button class="updateUser" value="<?= $value['id_member'] ?>">Update</button>
                 </td>
             </tr>
         <?php $counter++; } ?>

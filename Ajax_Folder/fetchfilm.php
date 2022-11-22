@@ -40,7 +40,8 @@
                 <td><?= $film['trailer'] ?></td>
                 <td><?= $film['sinopsis'] ?></td>
                 <td>
-                    <button class="deleteFilm" value="<?= $film['id'] ?>">Deactivate</button>
+                    <button class="deleteFilm" value="<?= $film['id'] ?>">Deactivate</button> <br>
+                    <button class="updateFilm" value="<?= $film['id'] ?>">Update</button>
                 </td>
             </tr>
         <?php $counter++; } ?>

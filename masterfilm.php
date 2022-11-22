@@ -17,6 +17,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="bootstrap-5.2.1-dist/css/bootstrap.css">
+        <link rel="stylesheet" href="mycss.css">
         <title>Document</title>
         <script src = "jquery-3.6.1.min.js"></script>
     </head>
@@ -49,7 +50,14 @@
 
         </table>
 
-        
+        <div class="popup_container">
+            <div class="popup">
+                <Button id="closePopup">Close</Button>
+                <div id="updateContainer">
+
+                </div>
+            </div>
+        </div>
         <script src="ajax.js"></script>
         <script>
             var addButton = document.getElementById("addFilm");
@@ -61,6 +69,7 @@
                 var nama = document.getElementById("namaFilm").value;
                 var mulai = document.getElementById("mulai").value;
                 var akhir = document.getElementById("akhir").value;
+                var closePopup = document.getElementById("closePopup");
                 
                 var file_data = $("#gambar").prop("files")[0];   
                 var gambar = file_data.name;
@@ -125,15 +134,20 @@
             */
             function updateFilm(){
                 var ajaxContainer = document.getElementById("filmContainer");
-                var fetchObject = new FetchObject("Ajax_Folder/fetchfilm.php", ajaxContainer, bindFilmDelete);
+                var fetchObject = new FetchObject("Ajax_Folder/fetchfilm.php", ajaxContainer, bindFilmAction);
 
                 fetch(fetchObject);
             }
 
-            function bindFilmDelete(){
+            function bindFilmAction(){
                 var listDelete = document.querySelectorAll(".deleteFilm");
                 for(var i=0; i<listDelete.length; i++){
                     listDelete[i].addEventListener("click", deleteFilm);
+                }
+
+                var listUpdate = document.querySelectorAll(".updateFilm");
+                for(var i=0; i<listUpdate.length; i++){
+                    listUpdate[i].addEventListener("click", showPopup);
                 }
             }
 
@@ -143,6 +157,36 @@
                 crud(crudObject, updateFilm);
             }
 
+            function fetchUpdateMenu(data){
+                var ajaxContainer = document.getElementById("updateContainer");
+                var fetchObject = new FetchObject("Ajax_Folder/fetchupdatefilmmenu.php", ajaxContainer, bindUpdateDataButton, data);
+
+                fetch(fetchObject);
+            }
+
+            function bindUpdateDataButton(){
+                var updateFilmDataButton = document.getElementById("updateFilmDataButton");
+                updateFilmDataButton.addEventListener("click", updateFilmData);
+            }
+
+            function updateFilmData(){
+
+            }
+
+            function showPopup(){
+                var data = `filmID=${this.value}`;
+                var popup = document.querySelector(".popup_container");
+                popup.style.display = "flex";
+
+                fetchUpdateMenu(data);
+            }
+
+            function hidePopup(){
+                var popup = document.querySelector(".popup_container");
+                popup.style.display = "none";
+            }
+
+            closePopup.addEventListener("click", hidePopup);
             setInterval(updateFilm, 500);
         </script>
     </body>

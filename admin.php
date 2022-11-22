@@ -17,6 +17,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="bootstrap-5.2.1-dist/css/bootstrap.css">
+        <link rel="stylesheet" href="mycss.css">
         <title>Document</title>
     </head>
     <body>
@@ -32,13 +33,21 @@
 
         </table>
 
-        
+        <div class="popup_container">
+            <div class="popup">
+                <Button id="closePopup">Close</Button>
+                <div id="updateContainer">
+
+                </div>
+            </div>
+        </div>
         <script src="ajax.js"></script>
         <script>
             var userContainer = document.getElementById("userContainer");
+            var closePopupButton = document.getElementById("closePopup");
             updateUser();
             
-            setInterval(500, updateUser);
+            setInterval(updateUser, 500);
 
             function updateUser(){
                 var ajaxcontainer = document.getElementById("userContainer");
@@ -47,9 +56,14 @@
             }
 
             function bindUserDelete(){
-                listDelete = document.querySelectorAll(".deleteUser");
+                var listDelete = document.querySelectorAll(".deleteUser");
                 for(var i = 0; i < listDelete.length; i++){
                     listDelete[i].addEventListener("click", deleteUser);
+                }
+
+                var listupdate = document.querySelectorAll(".updateUser");
+                for(var i = 0; i < listupdate.length; i++){
+                    listupdate[i].addEventListener("click", showPopup);
                 }
             }
 
@@ -59,6 +73,58 @@
                 
                 crud(crudObject, updateUser);
             }
+
+            function fetchUpdateMenu(data){
+                var ajaxContainer = document.getElementById("updateContainer");
+                var fetchObject = new FetchObject("Ajax_Folder/fetchupdateusermenu.php", ajaxContainer, bindUpdateDataButton, data);
+                
+                fetch(fetchObject);
+            }
+
+            function bindUpdateDataButton(){
+                var updateButton = document.getElementById("updateData");
+                updateButton.addEventListener("click", updateData);
+            }
+
+            function updateData(){
+                var userID = document.getElementById("idUpdate").value;
+                var username = document.getElementById("usernameUpdate").value;
+                var password = document.getElementById("passwordUpdate").value;
+                var name = document.getElementById("nameUpdate").value;
+                var email = document.getElementById("emailUpdate").value;
+                var saldo = document.getElementById("saldoUpdate").value;
+                var messageContainer = document.getElementById("messageContainer");
+
+                var data = `userID=${userID}&username=${username}&password=${password}&name=${name}&email=${email}&saldo=${saldo}`;
+                var crudObject = new CrudObject("Ajax_Folder/updateuserdata.php", data);
+                crud(crudObject, confirmationUpdateUserData, messageContainer);
+            }
+
+            function confirmationUpdateUserData(){
+                var message = "";
+                message = document.getElementById("messageContainer").innerText;
+                alert(message);
+                if(message.length == 0){
+                    hidePopup();
+                    updateUser();
+                }
+            }
+
+            function showPopup(){
+                var data = `userID=${this.value}`;
+                var popup = document.querySelector(".popup_container");
+                popup.style.display = "flex";
+
+                fetchUpdateMenu(data);
+            }
+            
+            function hidePopup(){
+                var popup = document.querySelector(".popup_container");
+                popup.style.display = "none";
+            }
+
+
+            closePopupButton.addEventListener("click", hidePopup);
         </script>
     </body>
 </html>
