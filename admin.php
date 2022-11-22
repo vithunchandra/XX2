@@ -106,7 +106,6 @@
                 alert(message);
                 if(message.length == 0){
                     hidePopup();
-                    updateUser();
                 }
             }
 
@@ -121,6 +120,7 @@
             function hidePopup(){
                 var popup = document.querySelector(".popup_container");
                 popup.style.display = "none";
+                updateUser();
             }
 
 

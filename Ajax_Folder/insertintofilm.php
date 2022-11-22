@@ -8,7 +8,6 @@
     $trailer = $_POST['trailer'];
     $sinopsis = $_POST['sinopsis'];
     $genre = json_decode($_POST['genre'], true);
-    var_dump($genre);
     
     $query = "INSERT INTO film(nama_film, start_date, end_date, image_path, trailer_link, sinopsis) 
     VALUES('$nama', '$mulai', '$akhir', '$gambar', '$trailer', '$sinopsis')";
