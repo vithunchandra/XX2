@@ -18,6 +18,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="bootstrap-5.2.1-dist/css/bootstrap.css">
         <title>Document</title>
+        <script src = "jquery-3.6.1.min.js"></script>
     </head>
     <body>
         <h1>Welcome Admin</h1>
@@ -32,7 +33,7 @@
         Nama Film : <input type="text" id="namaFilm"><br>
         Tanggal Mulai : <input type="date" id="mulai"><br>
         Tanggal Akhir : <input type="date" id="akhir"><br>
-        Gambar Film ; <input type="text" id="gambar"><br>
+        Gambar Film : <input id="gambar" type="file" name="gambar" /> <br><br>
         Trailer Link : <input type="text" id="trailer"><br>
         Sinopsis : <textarea id="sinopsis" cols="30" rows="10"></textarea><br>
         Genre : <br>
@@ -56,7 +57,49 @@
 
             addButton.addEventListener("click", insertIntoFilm);
             updateFilm();
+            function insertIntoFilm(){
+                var nama = document.getElementById("namaFilm").value;
+                var mulai = document.getElementById("mulai").value;
+                var akhir = document.getElementById("akhir").value;
+                
+                var file_data = $("#gambar").prop("files")[0];   
+                var gambar = file_data.name;
+                var form_data = new FormData();
+                form_data.append("file", file_data);
 
+
+                var trailer = document.getElementById("trailer").value;
+                var sinopsis = document.getElementById("sinopsis").value;
+                var checkbox = document.querySelectorAll(".genre:checked");
+                var genre = [];
+                for(var i=0; i<checkbox.length; i++){
+                    genre.push(checkbox[i].value);
+                }
+                document.getElementById("namaFilm").value = "";
+                document.getElementById("mulai").value = "";
+                document.getElementById("akhir").value = "";
+                document.getElementById("gambar").value = "";
+                document.getElementById("trailer").value = "";
+                document.getElementById("sinopsis").value = "";
+                var data = `nama=${nama}&mulai=${mulai}&akhir=${akhir}&gambar=${gambar}&trailer=${trailer}&sinopsis=${sinopsis}&genre=${JSON.stringify(genre)}`;
+                var crudObject = new CrudObject("Ajax_Folder/insertintofilm.php", data);
+                crud(crudObject, updateFilm);
+                
+                $.ajax({
+                    url: 'Ajax_Folder/upload.php', // <-- point to server-side PHP script 
+                    dataType: 'text',  // <-- what to expect back from the PHP script, if anything
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    data: form_data,                         
+                    type: 'post',
+                    success: function(php_script_response){
+                        console.log(php_script_response); // <-- display response from the PHP script, if any
+                    }
+                });
+                
+            }
+            /*
             function insertIntoFilm(){
                 var nama = document.getElementById("namaFilm").value;
                 var mulai = document.getElementById("mulai").value;
@@ -79,7 +122,7 @@
                 var crudObject = new CrudObject("Ajax_Folder/insertintofilm.php", data);
                 crud(crudObject, updateFilm);
             }
-
+            */
             function updateFilm(){
                 var ajaxContainer = document.getElementById("filmContainer");
                 var fetchObject = new FetchObject("Ajax_Folder/fetchfilm.php", ajaxContainer, bindFilmDelete);
