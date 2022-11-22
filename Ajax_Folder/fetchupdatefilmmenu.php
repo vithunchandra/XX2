@@ -10,6 +10,7 @@
 ?>
 
 <h3>Add Film</h3>
+ID : <input type="text" id="filmID" value="<?= $filmData['id_film'] ?>"> <br>
 Nama Film : <input type="text" id="namaUpdate" value="<?= $filmData['nama_film'] ?>"><br>
 Tanggal Mulai : <input type="date" id="mulaiUpdate" value=<?= $mulai ?>><br>
 Tanggal Akhir : <input type="date" id="akhirUpdate" value=<?= $akhir ?>><br>

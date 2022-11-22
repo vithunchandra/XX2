@@ -172,7 +172,7 @@
             }
 
             function updateFilmData(){
-                var filmID = this.value;
+                var filmID = document.getElementById("filmID").value;
                 var nama = document.getElementById("namaUpdate").value;
                 var mulai = document.getElementById("mulaiUpdate").value;
                 var akhir = document.getElementById("akhirUpdate").value;
@@ -184,8 +184,6 @@
                 form_data.append("file", file_data);
                 form_data.append("old", old);
 
-                alert(old);
-
                 var trailer = document.getElementById("trailerUpdate").value;
                 var sinopsis = document.getElementById("sinopsisUpdate").value;
                 var checkbox = document.querySelectorAll(".genre:checked");
@@ -194,15 +192,10 @@
                     genre.push(checkbox[i].value);
                     checkbox[i].checked = false;
                 }
-                document.getElementById("namaFilm").value = "";
-                document.getElementById("mulai").value = "";
-                document.getElementById("akhir").value = "";
-                document.getElementById("gambar").value = "";
-                document.getElementById("trailer").value = "";
-                document.getElementById("sinopsis").value = "";
                 var data = `filmID=${filmID}&nama=${nama}&mulai=${mulai}&akhir=${akhir}&gambar=${gambar}&trailer=${trailer}&sinopsis=${sinopsis}&genre=${JSON.stringify(genre)}`;
                 var crudObject = new CrudObject("Ajax_Folder/updatefilmdata.php", data);
-                crud(crudObject, updateFilm, confirmationUpdateFilmData);
+                var ajaxContainer = document.getElementById("messageContainer");
+                crud(crudObject, confirmationUpdateFilmData, ajaxContainer);
 
                 $.ajax({
                     url: 'Ajax_Folder/updateUpload.php', // <-- point to server-side PHP script 
