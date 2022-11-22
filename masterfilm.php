@@ -62,6 +62,7 @@
         <script>
             var addButton = document.getElementById("addFilm");
             var filmContainer = document.getElementById("filmContainer");
+            var closePopup = document.getElementById("closePopup");
 
             addButton.addEventListener("click", insertIntoFilm);
             updateFilm();
@@ -69,7 +70,6 @@
                 var nama = document.getElementById("namaFilm").value;
                 var mulai = document.getElementById("mulai").value;
                 var akhir = document.getElementById("akhir").value;
-                var closePopup = document.getElementById("closePopup");
                 
                 var file_data = $("#gambar").prop("files")[0];   
                 var gambar = file_data.name;
@@ -167,10 +167,46 @@
             function bindUpdateDataButton(){
                 var updateFilmDataButton = document.getElementById("updateFilmDataButton");
                 updateFilmDataButton.addEventListener("click", updateFilmData);
+                changeCheckboxState();
             }
 
             function updateFilmData(){
+                var nama = document.getElementById("namaUpdate").value;
+                var mulai = document.getElementById("mulaiUpdate").value;
+                var akhir = document.getElementById("akhirUpdate").value;
+                var closePopup = document.getElementById("closePopup");
+                
+                var file_data = $("#gambar").prop("files")[0];   
+                var gambar = file_data.name;
+                var form_data = new FormData();
+                form_data.append("file", file_data);
 
+
+                var trailer = document.getElementById("trailer").value;
+                var sinopsis = document.getElementById("sinopsis").value;
+                var checkbox = document.querySelectorAll(".genre:checked");
+                var genre = [];
+                for(var i=0; i<checkbox.length; i++){
+                    genre.push(checkbox[i].value);
+                }
+                document.getElementById("namaFilm").value = "";
+                document.getElementById("mulai").value = "";
+                document.getElementById("akhir").value = "";
+                document.getElementById("gambar").value = "";
+                document.getElementById("trailer").value = "";
+                document.getElementById("sinopsis").value = "";
+                var data = `nama=${nama}&mulai=${mulai}&akhir=${akhir}&gambar=${gambar}&trailer=${trailer}&sinopsis=${sinopsis}&genre=${JSON.stringify(genre)}`;
+                var crudObject = new CrudObject("Ajax_Folder/insertintofilm.php", data);
+                crud(crudObject, updateFilm);
+            }
+
+            function changeCheckboxState(){
+                var checkbox = document.querySelectorAll(".genreUpdate");
+                for(var i=0; i<checkbox.length; i++){
+                    if(checkbox[i].value == "1"){
+                        checkbox[i].checked = true;
+                    }
+                }
             }
 
             function showPopup(){
