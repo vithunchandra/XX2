@@ -83,6 +83,7 @@
                 var genre = [];
                 for(var i=0; i<checkbox.length; i++){
                     genre.push(checkbox[i].value);
+                    checkbox[i].checked = false;
                 }
                 document.getElementById("namaFilm").value = "";
                 document.getElementById("mulai").value = "";
@@ -171,33 +172,43 @@
             }
 
             function updateFilmData(){
+                var filmID = document.getElementById("filmID").value;
                 var nama = document.getElementById("namaUpdate").value;
                 var mulai = document.getElementById("mulaiUpdate").value;
                 var akhir = document.getElementById("akhirUpdate").value;
-                var closePopup = document.getElementById("closePopup");
                 
-                var file_data = $("#gambar").prop("files")[0];   
+                var file_data = $("#gambarUpdate").prop("files")[0];
+                var old = $("#old").val();
                 var gambar = file_data.name;
                 var form_data = new FormData();
                 form_data.append("file", file_data);
+                form_data.append("old", old);
 
-
-                var trailer = document.getElementById("trailer").value;
-                var sinopsis = document.getElementById("sinopsis").value;
+                var trailer = document.getElementById("trailerUpdate").value;
+                var sinopsis = document.getElementById("sinopsisUpdate").value;
                 var checkbox = document.querySelectorAll(".genre:checked");
                 var genre = [];
                 for(var i=0; i<checkbox.length; i++){
                     genre.push(checkbox[i].value);
+                    checkbox[i].checked = false;
                 }
-                document.getElementById("namaFilm").value = "";
-                document.getElementById("mulai").value = "";
-                document.getElementById("akhir").value = "";
-                document.getElementById("gambar").value = "";
-                document.getElementById("trailer").value = "";
-                document.getElementById("sinopsis").value = "";
-                var data = `nama=${nama}&mulai=${mulai}&akhir=${akhir}&gambar=${gambar}&trailer=${trailer}&sinopsis=${sinopsis}&genre=${JSON.stringify(genre)}`;
-                var crudObject = new CrudObject("Ajax_Folder/insertintofilm.php", data);
-                crud(crudObject, updateFilm);
+                var data = `filmID=${filmID}&nama=${nama}&mulai=${mulai}&akhir=${akhir}&gambar=${gambar}&trailer=${trailer}&sinopsis=${sinopsis}&genre=${JSON.stringify(genre)}`;
+                var crudObject = new CrudObject("Ajax_Folder/updatefilmdata.php", data);
+                var ajaxContainer = document.getElementById("messageContainer");
+                crud(crudObject, confirmationUpdateFilmData, ajaxContainer);
+
+                $.ajax({
+                    url: 'Ajax_Folder/updateUpload.php', // <-- point to server-side PHP script 
+                    dataType: 'text',  // <-- what to expect back from the PHP script, if anything
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    data: form_data,                         
+                    type: 'post',
+                    success: function(php_script_response){
+                        console.log(php_script_response); // <-- display response from the PHP script, if any
+                    }
+                });
             }
 
             function changeCheckboxState(){
@@ -206,6 +217,15 @@
                     if(checkbox[i].value == "1"){
                         checkbox[i].checked = true;
                     }
+                }
+            }
+
+            function confirmationUpdateFilmData(){
+                var message = "";
+                message = document.getElementById("messageContainer").innerText;
+                alert(message);
+                if(message.length == 0){
+                    hidePopup();
                 }
             }
 
@@ -220,6 +240,7 @@
             function hidePopup(){
                 var popup = document.querySelector(".popup_container");
                 popup.style.display = "none";
+                updateFilm();
             }
 
             closePopup.addEventListener("click", hidePopup);

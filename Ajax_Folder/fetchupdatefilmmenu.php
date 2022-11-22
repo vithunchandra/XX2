@@ -10,12 +10,14 @@
 ?>
 
 <h3>Add Film</h3>
+ID : <input type="text" id="filmID" value="<?= $filmData['id_film'] ?>"> <br>
 Nama Film : <input type="text" id="namaUpdate" value="<?= $filmData['nama_film'] ?>"><br>
 Tanggal Mulai : <input type="date" id="mulaiUpdate" value=<?= $mulai ?>><br>
 Tanggal Akhir : <input type="date" id="akhirUpdate" value=<?= $akhir ?>><br>
 
 Gambar Film : <img src="Gambar/<?= $filmData['image_path'] ?>" width="50px">
-<input id="gambar" type="file" name="gambar" value=""><?= $filmData['image_path'] ?> <br>
+<input id="gambarUpdate" type="file" name="gambar" value=""><?= $filmData['image_path'] ?> <br>
+<input type="text" name="old" id="old" hidden value="<?= $filmData['image_path'] ?>">
 Trailer Link : <input type="text" id="trailerUpdate" value="<?= $filmData['trailer_link'] ?>"><br>
 Sinopsis : <textarea id="sinopsisUpdate" cols="30" rows="10"><?= $filmData['sinopsis'] ?></textarea><br>
 Genre : <br>
@@ -33,4 +35,5 @@ Genre : <br>
             } ?>
         <?php } ?>
     <?php } ?><br>
+<span id="messageContainer"></span> <br>
 <button id="updateFilmDataButton">Add Film</button>
