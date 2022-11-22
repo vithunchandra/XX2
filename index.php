@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link rel="stylesheet" href="bootstrap-5.2.1-dist/css/bootstrap.css">
-
+  <link rel="stylesheet" href="mycss.css">
   <style>
     form {
         display: inline;
@@ -17,22 +17,25 @@
   </style>
 </head>
 <body>
-  <button onclick = "now_playing()" >Now Playing</button>
-  <button onclick = "upcoming()" >Upcoming</button>
-  <button ><a href = 'theater_schedule.php'>See Theater</a></button>
-  <?php 
-    if(isset($_SESSION['login'])) {
-      echo '<form action = "Controller/controller_member.php" method = "POST"><button name = "logout" type = "submit">logout</button></form>';
-    } else {
-      echo '<button><a href = "login.php">Login</a></button>';
-    }
-  ?>
-  <hr>
+  <div class="header">
+    <button class="btn-hover color-3" onclick = "now_playing()" >Now Playing</button>
+    <button class="btn-hover color-3" onclick = "upcoming()" >Upcoming</button>
+    
+    <?php 
+      if(isset($_SESSION['login'])) {
+        echo '<form action = "Controller/controller_member.php" method = "POST"><button class="btn-hover color-7 " name = "logout" type = "submit">logout</button></form>';
+      } else {
+        echo '<button class="btn-hover color-7 "> <a class="nounder" href = "login.php">Login</a></button>';
+      }
+    ?>
+   
+  </div>
+  
     <h5>Search</h5>
     <label>Title : </label> 
     <input id = 'search_key' type="text"> <br>
 
-    <button onclick="search()">Search</button>
+    <button class="search" onclick="search()">Search</button>
     
   <hr>
 
