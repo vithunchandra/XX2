@@ -24,10 +24,13 @@
 </head>
 <body>
   <div class="header">
-    <button class="btn-hover color-3" onclick = "now_playing()" >Now Playing</button>
-    <button class="btn-hover color-3" onclick = "upcoming()" >Upcoming</button>
+    <div class="buton">
+      <button class="btn-hover color-3" onclick = "now_playing()" >Now Playing</button>
+      <button class="btn-hover color-3" onclick = "upcoming()" >Upcoming</button>
+    </div>
     <form action = "theater_schedule.php"><button class="btn-hover color-3">Theater</button></form>
-    
+    <h1 class="title">XX</h1>
+    <h1 class="title2">2</h1>
     <?php 
       if(isset($_SESSION['login'])) {
         echo '<form action = "Controller/controller_member.php" method = "POST"><button class="btn-hover color-7 " name = "logout" type = "submit">logout</button></form>';
@@ -38,13 +41,15 @@
    
   </div>
   
+  <div class="main">
     <h5>Search</h5>
     <label>Title : </label> 
-    <input id = 'search_key' type="text"> <br>
+    <input class="rounded grai" id = 'search_key' type="text" placeholder="search here ">  <br>
 
     <button class="search" onclick="search()">Search</button>
+  </div>
     
-  <hr>
+
 
   <h1 id = 'title'>Title</h1>
   <div id="movie_list"></div>
@@ -65,7 +70,7 @@
         refreshContent += '<img width = "200px" height = "300px" class="card-img-top" src="Gambar/' + responseNow[i]['image_path'] +'" alt="'+responseNow[i]['nama_film']+'">';
         refreshContent += '<div class="card-body">';
           refreshContent += '<h5 class="card-title">'+ responseNow[i]['nama_film'] +'</h5>';
-          refreshContent += '<a  href="detail_film.php?id='+responseNow[i]['id_film']+' " class="btn btn-primary">Detail</a>';
+          refreshContent += '<a  href="detail_film.php?id='+responseNow[i]['id_film']+' " class="btn ">Detail</a>';
         refreshContent += '</div>';
       refreshContent += '</div>';
     }
