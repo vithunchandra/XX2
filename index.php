@@ -37,7 +37,7 @@
   <div class="main">
     <h5>Search</h5>
     <label>Title : </label> 
-    <input id = 'search_key' type="text"> <br>
+    <input class="rounded grai" id = 'search_key' type="text" placeholder="search here ">  <br>
 
     <button class="search" onclick="search()">Search</button>
   </div>
