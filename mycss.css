@@ -134,7 +134,7 @@ a:hover
 .btn-hover.color-72 {
   background-image: linear-gradient(to right, #eb4e2e, #fd0909);
   position: absolute;
-  margin-left: 84%;
+  margin-left: 94%;
 }
   .title
   {
@@ -257,6 +257,10 @@ a:hover
 
     /* login */
 
+    .logtit
+    {
+      margin-top: -15%;
+    }
     .backlog
     {
       background-color: black;
@@ -291,10 +295,11 @@ a:hover
       transition: 0.2s ease-in-out;
     }
     
-    svg {
+    .logon svg {
       position: absolute;
-      left: 30.2%;
-      top: 49%;
+      margin-left: -18%;
+      margin-top: -4.5%;
+     
       fill: none;
       border: 0px solid #91C9FF;
       stroke: rgb(98, 0, 255);
@@ -317,8 +322,9 @@ a:hover
       font-size: 18px;
       font-weight: 100;
     }
-    .logon span {
+    .logon svg span {
       color: rgb(77, 51, 171);
       font-size: 18px;
       font-weight: 100;
+      
     }

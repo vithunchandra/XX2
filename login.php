@@ -26,7 +26,8 @@
 <body class="backlog">
 <div class="login">
   <form action="Controller/controller_member.php" method = "POST">
-    <h1>Login</h1>
+    <h1 class="logtit">Login</h1>
+    <br><br>
     user : <input class="grai rounded" name = "user" type="text"> <br>
     pass : <input class="grai2 rounded" name = "pass" type="text">  <br>
     <button class="logon" name = 'login' type="submit"> <svg width="180px" height="60px" viewBox="0 0 180 60" class="border">
@@ -34,8 +35,9 @@
           <polyline points="179,1 179,59 1,59 1,1 179,1" class="hl-line" />
         </svg>
         <span>login</span></button>
+        <br><br>
   </form>
-  <a class="nounder" href="register.php">Register</a>
+  don't have account ? <a class="nounder" href="register.php">Register</a>
 </div>
  
 </body>
