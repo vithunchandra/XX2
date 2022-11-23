@@ -18,17 +18,18 @@
 </head>
 <body>
   <div class="header">
+    <h1 class="title">XX</h1>
+    <h1 class="title2">2</h1>
     <div class="buton">
       <button class="btn-hover color-3" onclick = "now_playing()" >Now Playing</button>
       <button class="btn-hover color-3" onclick = "upcoming()" >Upcoming</button>
     </div>
-    <h1 class="title">XX</h1>
-    <h1 class="title2">2</h1>
+  
     <?php 
       if(isset($_SESSION['login'])) {
         echo '<form action = "Controller/controller_member.php" method = "POST"><button class="btn-hover color-7 " name = "logout" type = "submit">logout</button></form>';
       } else {
-        echo '<button class="btn-hover color-7 "> <a class="nounder" href = "login.php">Login</a></button>';
+        echo '<button class="btn-hover color-72"> <a class="nounder" href = "login.php">Login</a></button>';
       }
     ?>
    

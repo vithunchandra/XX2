@@ -47,7 +47,7 @@ body{
 
 .buton
 {
-  width: 300px;
+  width: 20%;
 
   margin-left: 10px;
 }
@@ -122,20 +122,25 @@ a:hover
 }
 
 .btn-hover.color-3 {
-    background-image: linear-gradient(to right, #667eea, #764ba2, #6B8DD6, #8E37D7);
-    box-shadow: 0 4px 15px 0 rgba(116, 79, 168, 0.75);
+    background-image: linear-gradient(to right, #c17d29, #ff9900);
+   
     
 }
 .btn-hover.color-7 {
-    background-image: linear-gradient(to right, #6253e1, #852D91, #A3A1FF, #F24645);
-    box-shadow: 0 4px 15px 0 rgba(126, 52, 161, 0.75);
-    margin-left: 68%;
+    background-image: linear-gradient(to right, #eb4e2e, #fd0909);
+    position: absolute;
+    margin-left: 65%;
 }
-
+.btn-hover.color-72 {
+  background-image: linear-gradient(to right, #eb4e2e, #fd0909);
+  position: absolute;
+  margin-left: 94%;
+}
   .title
   {
    color: #5E5DF0;
    font-style: italic;
+   margin-left: 2%;
   }
   .title2
   {
@@ -218,7 +223,7 @@ a:hover
 
 .main
 {
-  background: linear-gradient(to right, #667eea, #764ba2, #6B8DD6, #8E37D7);
+  background: linear-gradient(to right, #dfb339, #ba8f01);
   height: 120px;
 }
   .search {
@@ -246,4 +251,74 @@ a:hover
     .grai
     {
       background-color: rgb(193, 193, 193);
+    }
+
+
+
+    /* login */
+
+    .backlog
+    {
+      background-color: black;
+    }
+    .grai2
+    {
+      background-color: rgb(193, 193, 193);
+      margin-top: 1%;
+    }
+    .login
+    {
+      position: absolute;
+      margin-left: 35%;
+      margin-top: 10%;
+      background-color: #697386;
+      height: 400px;
+      width: 400px;
+      padding-left: 5%;
+      padding-top: 5%;
+      border-radius: 10px;
+    }
+    
+    .logon {
+      width: 180px;
+      height: 60px;
+      margin-left: 15%;
+      margin-top: 1%;
+      cursor: pointer;
+      background: rgb(116, 158, 174);
+      border: 0px solid #91C9FF;
+      outline: none;
+      transition: 0.2s ease-in-out;
+    }
+    
+    svg {
+      position: absolute;
+      left: 30.2%;
+      top: 49%;
+      fill: none;
+      border: 0px solid #91C9FF;
+      stroke: rgb(98, 0, 255);
+      stroke-dasharray: 150 480;
+      stroke-dashoffset: 150;
+      transition: 0.5s ease-in-out;
+    }
+    
+    .logon:hover {
+      transition: 0.5s ease-in-out;
+      background: #004996;
+     
+    }
+    
+    .logon:hover svg {
+      stroke-dashoffset: -480;
+    }
+    .logon:hover span {
+      color: rgb(0, 0, 0);
+      font-size: 18px;
+      font-weight: 100;
+    }
+    .logon span {
+      color: rgb(77, 51, 171);
+      font-size: 18px;
+      font-weight: 100;
     }
