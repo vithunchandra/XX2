@@ -92,4 +92,17 @@
       $result['session'] = fetch('select * from session');
       echo json_encode($result);
     } 
+
+    if(isset($_GET['get_all_film_theater'])) {
+      $id_theater = $_GET['id_theater'];
+      $sql = "SELECT s.id_schedule,s.id_session,s.broadcast_date,ses.session_start,ses.session_end,f.* 
+      FROM `theater_schedule` ts,`schedule` s,`film` f,`session` ses 
+      WHERE id_theater = $id_theater and (ts.id_schedule = s.id_schedule) and (f.id_film = s.id_film) 
+      and ts.status = 1 and s.status = 1 and f.status = 1 and ses.id_session = s.id_session 
+      order by s.broadcast_date asc,s.id_session asc;";
+
+      $result = fetch($sql);
+
+      echo json_encode($result);
+    }
 ?>
