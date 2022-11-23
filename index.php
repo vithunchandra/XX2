@@ -1,5 +1,11 @@
 <?php
   session_start();
+
+  if(isset($_SESSION['login'])) {
+    if($_SESSION['login'] == 'admin') {
+      header("Location:admin.php");
+    }
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +19,7 @@
   <style>
     form {
         display: inline;
-    }
+    } 
   </style>
 </head>
 <body>
@@ -25,6 +31,8 @@
       <button class="btn-hover color-3" onclick = "upcoming()" >Upcoming</button>
     </div>
   
+    <form action = "theater_schedule.php"><button class="btn-hover color-3">Theater</button></form>
+    
     <?php 
       if(isset($_SESSION['login'])) {
         echo '<form action = "Controller/controller_member.php" method = "POST"><button class="btn-hover color-7 " name = "logout" type = "submit">logout</button></form>';
