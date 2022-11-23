@@ -30,10 +30,13 @@
         <h1 class="title">XX</h1>
         <h1 class="title2">2</h1>
         <div class="buton">
-        <button class="btn-hover color-3" onclick = "now_playing()" >Now Playing</button>
-        <button class="btn-hover color-3" onclick = "upcoming()" >Upcoming</button>
-        <button class="btn-hover color-3" onclick = "showPopup()" >Topup</button>
-        <form action = "theater_schedule.php"><button class="btn-hover color-3">Theater</button></form>
+        <ul> 
+        <li onclick = "now_playing()" class=" hover-underline-animation">Now Playing</li>
+        <li onclick = "upcoming()"  class=" hover-underline-animation">Upcoming</li>
+        <li onclick = "showPopup()"  class=" hover-underline-animation">Topup</li>
+        <li class=" hover-underline-animation"> <a class="nounder2" href="theater_schedule.php">Theater</a> </li>
+      </ul>
+        
         </div>
 
         
