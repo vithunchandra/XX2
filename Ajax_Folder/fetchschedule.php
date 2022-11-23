@@ -1,7 +1,7 @@
 <?php
     require "../Controller/functions.php";
 
-    $scheduleData = fetchData("SELECT s.id_schedule AS id, f.nama_film AS nama, s.broadcast_date AS date, se.session_start AS start, se.session_end AS end, 
+    $scheduleData = fetchData("SELECT s.id_schedule AS id, f.nama_film AS nama, s.broadcast_date AS date, s.id_session As id_session, se.session_start AS start, se.session_end AS end, 
     s.status AS status, f.image_path AS gambar FROM schedule s JOIN film f ON f.id_film = s.id_film JOIN session se ON se.id_session = s.id_session");
 ?>
 
@@ -31,9 +31,18 @@
                     <?php
                         $theaterID = 1;
                         $scheduleID = $schedule['id'];
+                        $sessionID = $schedule['id_session'];
                         $theater = fetchData("SELECT * FROM theater_schedule WHERE id_schedule = '$scheduleID'");
-                        foreach($theater as $value){ ?>
-                            <input type="checkbox" class="theater" value="<?= $theaterID ?>-<?= $schedule['id'] ?>-<?= $value['status'] ?>"> Theater <?= $theaterID ?> <br>
+                        foreach($theater as $value){
+                            $query = "SELECT EXISTS(SELECT * FROM theater_schedule ts JOIN schedule s ON s.id_schedule = ts.id_schedule
+                            WHERE s.id_schedule != '$scheduleID' AND s.id_session = '$sessionID' AND ts.id_theater = '$theaterID' AND ts.status = 1)"; 
+                            $isCollide = fetchScalar($query);
+                            if($isCollide){ ?>
+                                <input type="checkbox" class="theater" value="<?= $theaterID ?>-<?= $schedule['id'] ?>-<?= $value['status'] ?>" disabled> Theater <?= $theaterID ?> <br>
+                            <?php }else{ ?>
+                                <input type="checkbox" class="theater" value="<?= $theaterID ?>-<?= $schedule['id'] ?>-<?= $value['status'] ?>"> Theater <?= $theaterID ?> <br>
+                            <?php } ?>
+                    
                         <?php $theaterID++;} ?>
                 </td>
                 <td>
