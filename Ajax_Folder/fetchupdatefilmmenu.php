@@ -16,7 +16,7 @@ Tanggal Mulai : <input type="date" id="mulaiUpdate" value=<?= $mulai ?>><br>
 Tanggal Akhir : <input type="date" id="akhirUpdate" value=<?= $akhir ?>><br>
 
 Gambar Film : <img src="Gambar/<?= $filmData['image_path'] ?>" width="50px">
-<input id="gambarUpdate" type="file" name="gambar" value=""><?= $filmData['image_path'] ?> <br>
+<input id="gambarUpdate" type="file" name="gambar" value=""> <br>
 <input type="text" name="old" id="old" hidden value="<?= $filmData['image_path'] ?>">
 Trailer Link : <input type="text" id="trailerUpdate" value="<?= $filmData['trailer_link'] ?>"><br>
 Sinopsis : <textarea id="sinopsisUpdate" cols="30" rows="10"><?= $filmData['sinopsis'] ?></textarea><br>
@@ -25,15 +25,17 @@ Genre : <br>
     $counter = 0;
     for($i=0; $i<7; $i++){
         if($counter < count($genre)){
-            if($genre[$counter]['id_genre'] == $i){ ?>
-                <input type="checkbox" class="genreUpdate" value="1"> <?= $namaGenre[$i]['nama_genre'] ?>
+            if($genre[$counter]['id_genre'] == ($i + 1)){ ?>
+                <input type="checkbox" class="genreUpdate" value="1-<?= ($i + 1) ?>"> <?= $namaGenre[$i]['nama_genre'] ?>
             <?php $counter++;}else{ ?>
-                <input type="checkbox" class="genreUpdate" value="0"> <?= $namaGenre[$i]['nama_genre'] ?>
+                <input type="checkbox" class="genreUpdate" value="0-<?= ($i + 1) ?>"> <?= $namaGenre[$i]['nama_genre'] ?>
             <?php } ?>
-            <?php if($i % 2 == 1){
-                echo "<br>";
-            } ?>
+        <?php }else{ ?>
+            <input type="checkbox" class="genreUpdate" value="0-<?= ($i + 1) ?>"> <?= $namaGenre[$i]['nama_genre'] ?>
         <?php } ?>
+        <?php if($i % 2 == 1){
+            echo "<br>";
+        } ?>
     <?php } ?><br>
 <span id="messageContainer"></span> <br>
 <button id="updateFilmDataButton">Add Film</button>

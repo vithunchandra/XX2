@@ -72,7 +72,10 @@
                 var akhir = document.getElementById("akhir").value;
                 
                 var file_data = $("#gambar").prop("files")[0];   
-                var gambar = file_data.name;
+                var gambar = "";
+                if(file_data != null){
+                    var gambar = file_data.name;
+                }
                 var form_data = new FormData();
                 form_data.append("file", file_data);
 
@@ -177,19 +180,25 @@
                 var mulai = document.getElementById("mulaiUpdate").value;
                 var akhir = document.getElementById("akhirUpdate").value;
                 
-                var file_data = $("#gambarUpdate").prop("files")[0];
                 var old = $("#old").val();
-                var gambar = file_data.name;
+                alert(old);
+                var file_data = $("#gambarUpdate").prop("files")[0];
+                if(typeof file_data !== 'undefined'){
+                    gambar = file_data.name;
+                }else{
+                    gambar = old;
+                }
+                
                 var form_data = new FormData();
                 form_data.append("file", file_data);
                 form_data.append("old", old);
-
                 var trailer = document.getElementById("trailerUpdate").value;
                 var sinopsis = document.getElementById("sinopsisUpdate").value;
-                var checkbox = document.querySelectorAll(".genre:checked");
+                var checkbox = document.querySelectorAll(".genreUpdate:checked");
                 var genre = [];
                 for(var i=0; i<checkbox.length; i++){
-                    genre.push(checkbox[i].value);
+                    genreID = checkbox[i].value.split("-")[1];
+                    genre.push(genreID);
                     checkbox[i].checked = false;
                 }
                 var data = `filmID=${filmID}&nama=${nama}&mulai=${mulai}&akhir=${akhir}&gambar=${gambar}&trailer=${trailer}&sinopsis=${sinopsis}&genre=${JSON.stringify(genre)}`;
@@ -197,24 +206,28 @@
                 var ajaxContainer = document.getElementById("messageContainer");
                 crud(crudObject, confirmationUpdateFilmData, ajaxContainer);
 
-                $.ajax({
-                    url: 'Ajax_Folder/updateUpload.php', // <-- point to server-side PHP script 
-                    dataType: 'text',  // <-- what to expect back from the PHP script, if anything
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    data: form_data,                         
-                    type: 'post',
-                    success: function(php_script_response){
-                        console.log(php_script_response); // <-- display response from the PHP script, if any
-                    }
-                });
+                if(typeof file_data !== 'undefined'){
+                    $.ajax({
+                        url: 'Ajax_Folder/updateUpload.php', // <-- point to server-side PHP script 
+                        dataType: 'text',  // <-- what to expect back from the PHP script, if anything
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        data: form_data,                         
+                        type: 'post',
+                        success: function(php_script_response){
+                            console.log(php_script_response); // <-- display response from the PHP script, if any
+                        }
+                    });
+                }
+                
             }
 
             function changeCheckboxState(){
                 var checkbox = document.querySelectorAll(".genreUpdate");
                 for(var i=0; i<checkbox.length; i++){
-                    if(checkbox[i].value == "1"){
+                    var status = checkbox[i].value.split("-")[0];
+                    if(status == "1"){
                         checkbox[i].checked = true;
                     }
                 }
@@ -223,7 +236,6 @@
             function confirmationUpdateFilmData(){
                 var message = "";
                 message = document.getElementById("messageContainer").innerText;
-                alert(message);
                 if(message.length == 0){
                     hidePopup();
                 }
