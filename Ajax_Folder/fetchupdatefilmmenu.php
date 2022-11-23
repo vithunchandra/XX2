@@ -37,5 +37,5 @@ Genre : <br>
             echo "<br>";
         } ?>
     <?php } ?><br>
-<span id="messageContainer"></span> <br>
+<span id="messageContainerUpdate"></span> <br>
 <button id="updateFilmDataButton">Add Film</button>

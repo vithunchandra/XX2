@@ -45,6 +45,7 @@
         <input type="checkbox" class="genre" value="5"> Comedy<br>
         <input type="checkbox" class="genre" value="6"> Shounen
         <input type="checkbox" class="genre" value="7"> Thriller<br>
+        <span id="messageContainer"></span> <br>
         <button id="addFilm">Add Film</button>
         <table id="filmContainer" border="1" class="table">
 
@@ -73,11 +74,12 @@
                 
                 var file_data = $("#gambar").prop("files")[0];   
                 var gambar = "";
-                if(file_data != null){
+                if(typeof file_data !== 'undefined'){
                     var gambar = file_data.name;
+                    var form_data = new FormData();
+                    form_data.append("file", file_data);
                 }
-                var form_data = new FormData();
-                form_data.append("file", file_data);
+                
 
 
                 var trailer = document.getElementById("trailer").value;
@@ -96,21 +98,23 @@
                 document.getElementById("sinopsis").value = "";
                 var data = `nama=${nama}&mulai=${mulai}&akhir=${akhir}&gambar=${gambar}&trailer=${trailer}&sinopsis=${sinopsis}&genre=${JSON.stringify(genre)}`;
                 var crudObject = new CrudObject("Ajax_Folder/insertintofilm.php", data);
-                crud(crudObject, updateFilm);
+                var ajaxContainer = document.getElementById("messageContainer");
+                crud(crudObject, updateFilm, ajaxContainer);
                 
-                $.ajax({
-                    url: 'Ajax_Folder/upload.php', // <-- point to server-side PHP script 
-                    dataType: 'text',  // <-- what to expect back from the PHP script, if anything
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    data: form_data,                         
-                    type: 'post',
-                    success: function(php_script_response){
-                        console.log(php_script_response); // <-- display response from the PHP script, if any
-                    }
-                });
-                
+                if(typeof file_data !== 'undefined'){
+                    $.ajax({
+                        url: 'Ajax_Folder/upload.php', // <-- point to server-side PHP script 
+                        dataType: 'text',  // <-- what to expect back from the PHP script, if anything
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        data: form_data,                         
+                        type: 'post',
+                        success: function(php_script_response){
+                            console.log(php_script_response); // <-- display response from the PHP script, if any
+                        }
+                    });
+                }
             }
             /*
             function insertIntoFilm(){
@@ -203,7 +207,7 @@
                 }
                 var data = `filmID=${filmID}&nama=${nama}&mulai=${mulai}&akhir=${akhir}&gambar=${gambar}&trailer=${trailer}&sinopsis=${sinopsis}&genre=${JSON.stringify(genre)}`;
                 var crudObject = new CrudObject("Ajax_Folder/updatefilmdata.php", data);
-                var ajaxContainer = document.getElementById("messageContainer");
+                var ajaxContainer = document.getElementById("messageContainerUpdate");
                 crud(crudObject, confirmationUpdateFilmData, ajaxContainer);
 
                 if(typeof file_data !== 'undefined'){
@@ -235,7 +239,7 @@
 
             function confirmationUpdateFilmData(){
                 var message = "";
-                message = document.getElementById("messageContainer").innerText;
+                message = document.getElementById("messageContainerUpdate").innerText;
                 if(message.length == 0){
                     hidePopup();
                 }
