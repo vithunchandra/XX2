@@ -29,7 +29,8 @@
             <button name="masterSchedule" type="submit">Master Schedule</button>
         </form>
         <h2>Master User</h2>
-        <table id="userContainer" border="1" class="table">
+        <button id="user_menu">User Menu</button> <button id="point_menu">Point Menu</button>
+        <table id="ajaxContainer" border="1" class="table">
 
         </table>
 
@@ -43,15 +44,55 @@
         </div>
         <script src="ajax.js"></script>
         <script>
-            var userContainer = document.getElementById("userContainer");
+            var ajaxContainer = document.getElementById("ajaxContainer");
             var closePopupButton = document.getElementById("closePopup");
-            updateUser();
+            var userMenu = document.getElementById("user_menu");
+            var pointMenu = document.getElementById("point_menu");
             
-            setInterval(updateUser, 500);
+            function showUserMenu(){
+                updateUser();
+                setInterval(updateUser, 500);    
+            }
+
+            function showPointMenu(){
+                updatePoint();
+                setInterval(updatePoint, 500);
+            }
+
+            function updatePoint(){
+                var fetchObject = new FetchObject("Ajax_Folder/fetch_point_request.php", ajaxContainer, bindPointAction);
+                fetch(fetchObject);
+            }
+
+            function bindPointAction(){
+                var listPointRequestAccept = document.querySelectorAll(".accept-button");
+                for(var i = 0; i < listPointRequestAccept.length; i++){
+                    listPointRequestAccept[i].addEventListener("click", acceptPointRequest);
+                }
+
+                var listPointRequestCancel = document.querySelectorAll(".cancel-button");
+                for(var i = 0; i < listPointRequestCancel.length; i++){
+                    listPointRequestAccept[i].addEventListener("click", cancelPointRequest);
+                }
+            }
+
+            function acceptPointRequest(){
+                alert("Test");
+                var data = `id_point_request=${this.value}&value=1`;
+                var crudObject = new CrudObject("Ajax_Folder/point_request_action.php", data);
+                
+                crud(crudObject);
+            }
+
+            function cancelPointRequest(){
+                var data = `id_point_request=${this.value}&value=0`;
+                var crudObject = new CrudObject("Ajax_Folder/point_request_action.php", data);
+                
+                crud(crudObject);
+            }
 
             function updateUser(){
-                var ajaxcontainer = document.getElementById("userContainer");
-                var fetchObject = new FetchObject("Ajax_Folder/fetchuser.php", ajaxcontainer, bindUserDelete);
+                var fetchObject = new FetchObject("Ajax_Folder/fetchuser.php", ajaxContainer, bindUserDelete);
                 fetch(fetchObject);
             }
 
@@ -123,8 +164,11 @@
                 updateUser();
             }
 
-
+            userMenu.addEventListener("click", showUserMenu);
+            pointMenu.addEventListener("click", showPointMenu);
             closePopupButton.addEventListener("click", hidePopup);
+            
+            updateUser();
         </script>
     </body>
 </html>

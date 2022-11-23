@@ -35,4 +35,6 @@
     }
     echo json_encode($film);
   }
+
+  if(isset($_GET['']))
 ?>
