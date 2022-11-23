@@ -29,9 +29,10 @@
     <div class="buton">
       <button class="btn-hover color-3" onclick = "now_playing()" >Now Playing</button>
       <button class="btn-hover color-3" onclick = "upcoming()" >Upcoming</button>
+      <form action = "theater_schedule.php"><button class="btn-hover color-3">Theater</button></form>
     </div>
   
-    <form action = "theater_schedule.php"><button class="btn-hover color-3">Theater</button></form>
+    
     
     <?php 
       if(isset($_SESSION['login'])) {
