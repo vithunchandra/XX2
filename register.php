@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="mycss.css">  
   <title>Document</title>
 </head>
-<body class="">
+<body class="black">
 <div class="login">
   <form action="Controller/controller_member.php" method = "POST">
     <h1 class="reg" >Form Register</h1>
