@@ -50,7 +50,7 @@
 
     if(isset($_GET['buy'])) {
       $user = $_GET['user'];
-
+      $total = $_GET['total'];
       $theater = $_GET['theater'];
       $movieNow = $_GET['film'];
       $sesi = $_GET['sesi'];
@@ -65,6 +65,7 @@
       $id_now = fetch("SELECT (ifnull(max(id_nota),0) + 1) as new_id FROM `h_movie` WHERE 1;")[0]['new_id'] ;
       $sql_header = "INSERT INTO `h_movie`(`id_nota`,`id_member`, `id_theater_schedule`, `buy_date`) 
             VALUES ($id_now,$user,$id_theater_schedule,NOW())";
+      $sql_update_point = "UPDATE `member` SET `saldo`=((SELECT saldo from member where id_member = 1) - $total) WHERE `id_member` = $user";
       
       $conn->begin_transaction();
       try {
@@ -75,7 +76,8 @@
             VALUES ($id_now,".$seat[$i][0].",".$seat[$i][1].")";
           $conn->query($sql_desc);
         }
-
+        
+        $conn->query($sql_update_point);
 
         $conn->commit();
       } catch (mysqli_sql_exception $exception) {
@@ -104,5 +106,11 @@
       $result = fetch($sql);
 
       echo json_encode($result);
+    }
+
+    if(isset($_GET['get_theater_price'])) {
+      $theater = $_GET['theater'];
+      $price = fetch("SELECT harga FROM `theater` WHERE `id_theater` = $theater")[0]['harga'];
+      echo $price ;
     }
 ?>

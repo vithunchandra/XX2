@@ -9,6 +9,8 @@
 
       $sql_option = "Select id_theater,nama_theater from theater where 1";
       $option_list = $conn->query($sql_option);
+
+      
       
       echo "<script>var movieNow = ".$_GET['id']."</script>";
       echo "<script>var userNow = ".$_SESSION['login']['id_member']."</script>";
@@ -34,6 +36,11 @@
   <button><a href = "index.php">Back</a></button>  
   <hr>
 
+  <div class="point" style="text-align: right;">
+    <h3 >POINT : </h3>
+    <h3 id = 'point' ></h3>
+  </div>
+  
   <h1><?= $movie['nama_film'] ?></h1>
 
   <h3>Pilih Theater:</h3>
@@ -62,7 +69,9 @@
   <div id="av_seat"></div>
 
   <h3>Jumlah Tiket:</h3>
-  <input disabled value = 0 id = 'jum_tiket' type="text">
+  <input disabled value = 0 id = 'jum_tiket' type="text"> <br>
+  <h3>Total Harga:</h3>
+  <input disabled value = 0 id = 'total' type="text"> <br>
 
   <button onclick="buy()">Buy!</button>
 
@@ -170,23 +179,58 @@
       var idx_i = parseInt(e.value.split(';')[0]);
       var idx_j = parseInt(e.value.split(';')[1]);
       choosen_seat.push([idx_i,idx_j]);
+
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            document.getElementById('total').value = xhttp.responseText*document.getElementById('jum_tiket').value;
+          }
+      };
+
+      xhttp.open("GET", "Controller/controller_theater.php?get_theater_price=1&theater=" +  document.getElementById('theater').value);
+      xhttp.send();
     }
   }
 
   function buy() {
-    theater = document.getElementById('theater').value;
-    tanngal = document.getElementById('tanggal').value;
-    sesi = document.getElementById('sesi').value;
+    var uang = parseInt(document.getElementById('point').innerHTML);
+    var harga = document.getElementById('total').value;
+    
+    if(uang >= harga) {
+      theater = document.getElementById('theater').value;
+      tanngal = document.getElementById('tanggal').value;
+      sesi = document.getElementById('sesi').value;
+      
+      
 
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            update_pilih_tgl();
+            refreshPoint();
+            alert("Pembelian Berhasil!");
+          }
+      };
+      xhttp.open("GET", "Controller/controller_theater.php?buy=1&seat="+JSON.stringify(choosen_seat)+"&theater="+theater + "&tanggal='"+tanngal+"'&film="+movieNow + "&sesi=" + sesi + "&user=" + userNow + "&total=" + harga  );
+      xhttp.send();
+
+    }
+    else {
+      alert('Uang Anda Tidak Cukup!');
+    }
+  }
+
+  function refreshPoint() {
     var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-          console.log(xhttp.responseText);
-        }
-    };
-    xhttp.open("GET", "Controller/controller_theater.php?buy=1&seat="+JSON.stringify(choosen_seat)+"&theater="+theater + "&tanggal='"+tanngal+"'&film="+movieNow + "&sesi=" + sesi + "&user=" + userNow  );
-    xhttp.send();
+      xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            document.getElementById('point').innerHTML = xhttp.responseText;
+          }
+      };
+      xhttp.open("GET", "Controller/controller_member.php?get_point=1&id=" +  userNow);
+      xhttp.send();
   }
 
   update_pilih_tgl();
+  refreshPoint();
 </script>

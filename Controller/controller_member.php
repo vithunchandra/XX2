@@ -38,6 +38,13 @@
         
     }
 
+    if(isset($_GET['get_point'])) {
+        $member = $_GET['id'];
+        $sql= "SELECT saldo from member where id_member= $member";
+        $saldo = fetch($sql)[0]['saldo'];
+        echo $saldo;
+    }
+
     if(isset($_POST['logout'])) {
         unset($_SESSION['login']);
         header("Location:../index.php");
