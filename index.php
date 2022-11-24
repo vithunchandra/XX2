@@ -56,9 +56,15 @@
     <div class="main">
         <h5>Search</h5>
         <label>Title : </label> 
-        <input class="rounded grai" id = 'search_key' type="text" placeholder="search here ">  <br>
+        
 
-        <button class="search" onclick="search()">Search</button>
+        
+        <div class="search-container">
+        <form action="/search" method="get">
+            <input class="search expandright" id="search_key" type="search" name="q" placeholder="Search">
+            <label class="buttonsearch searchbutton" for="search_key"><span class="mglass">&#9906;</span></label>
+        </form>
+        </div>
     </div>
         
 
