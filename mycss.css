@@ -7,7 +7,12 @@
 body{
     width: 100%;
     height: 100vh;
-    background-color: black;
+   
+}
+
+.black
+{
+  background-color: black;
 }
 
 .w-33{
@@ -380,3 +385,19 @@ a:hover
       margin-left:  -8%;
       margin-right: 5%;
     }
+
+
+    /* register */
+
+    .reg
+    {
+      margin-top: -22%;
+    }
+.mini
+{
+  width: 80%;
+  height: 50%;
+  margin-bottom: -3%;
+ 
+}
+    

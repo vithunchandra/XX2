@@ -25,7 +25,7 @@
     } 
 </style>
 </head>
-<body>
+<body class="black">
     <div class="header">
         <h1 class="title">XX</h1>
         <h1 class="title2">2</h1>
