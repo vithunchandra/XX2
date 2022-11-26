@@ -24,7 +24,7 @@
         <h1 class="text-center">Welcome Admin</h1>
         <form action="Controller/controller_member.php" method = "POST" class="text-center">
             <button name="logout" type="submit" class="btn btn-outline-primary">Logout</button>
-            <button name="masterUser" type="submit" class="btn btn-outline-primary">Master User</button>
+            <button name="masterUser" type="submit" class="btn btn-primary">Master User</button>
             <button name="masterFilm" type="submit" class="btn btn-outline-primary">Master Film</button>
             <button name="masterSchedule" type="submit" class="btn btn-outline-primary">Master Schedule</button>
         </form>
@@ -38,7 +38,7 @@
         <div class="popup_container">
             <div class="popup text-center">
                 <img src="Assets/close.png" class="close-button" id="closePopup">
-                <div id="updateContainer">
+                <div id="updateContainer" class="container-fluid" style="width: 500px;">
 
                 </div>
             </div>

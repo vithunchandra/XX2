@@ -7,57 +7,32 @@
 
 <h3 class="text-center">Update User</h3>
 
-<div class="container">
-    <div class="row text-end">
-        <div class="col">
-            <label for="idUpdate">ID :</label>
-        </div>
-        <div class="col">
-            <input id="idUpdate" type="text" value="<?= $userData['id_member'] ?>" disabled>
-        </div>
-    </div>
-    <div class="row mt-3 text-end">
-        <div class="col">
-            <label for="usernameUpdate">Username :</label>
-        </div>
-        <div class="col">
-            <input id="usernameUpdate" type="text" value="<?= $userData['user'] ?>">
-        </div>
-    </div>
-    <div class="row mt-3 text-end">
-        <div class="col">
-            <label for="passwordUpdate">Password :</label>
-        </div>
-        <div class="col">
-            <input id="passwordUpdate" type="text" value="<?= $userData['pass'] ?>">
-        </div>
-    </div>
-    <div class="row mt-3 text-end">
-        <div class="col">
-            <label for="nameUpdate">Name :</label>
-        </div>
-        <div class="col">
-            <input id="nameUpdate" type="text" value="<?= $userData['nama_member'] ?>">
-        </div>
-    </div>
-    <div class="row mt-3 text-end">
-        <div class="col">
-            <label for="emailUpdate" >Email :</label>
-        </div>
-        <div class="col">
-            <input id="emailUpdate" type="text" value="<?= $userData['email'] ?>">
-        </div>
-    </div>
-    <div class="row mt-3 text-end">
-        <div class="col">
-            <label for="saldoUpdate" >Saldo :</label> <br>
-        </div>
-        <div class="col">
-            <input id="saldoUpdate" type="text" value="<?= $userData['saldo'] ?>"> <br>
-        </div>
-    </div> <br>
-    <span id="messageContainer"></span><br>
-    <button id="updateData" class="btn btn-primary">Update User Data</button>
+<div class="form-floating mb-3">
+    <input type="text" class="form-control" id="idUpdate" value="<?= $userData['id_member'] ?>" placeholder="ID">
+    <label for="idupdate">ID</label>
 </div>
+<div class="form-floating mb-3">
+    <input type="text" class="form-control" id="usernameUpdate" value="<?= $userData['user'] ?>" placeholder="Username">
+    <label for="usernameUpdate">Username</label>
+</div>
+<div class="form-floating mb-3">
+    <input type="text" class="form-control" id="passwordUpdate" value="<?= $userData['pass'] ?>" placeholder="Password">
+    <label for="passwordUpdate">Password</label>
+</div>
+<div class="form-floating mb-3">
+    <input type="text" class="form-control" id="nameUpdate" value="<?= $userData['nama_member'] ?>" placeholder="Nama">
+    <label for="nameUpdate">Nama</label>
+</div>
+<div class="form-floating mb-3">
+    <input type="text" class="form-control" id="emailUpdate" value="<?= $userData['email'] ?>" placeholder="Email">
+    <label for="emailUpdate">Email</label>
+</div>
+<div class="form-floating">
+    <input type="text" class="form-control" id="saldoUpdate" value="<?= $userData['saldo'] ?>" placeholder="Saldo">
+    <label for="saldoUpdate">Saldo</label>
+</div> <br>
+
+<span id="messageContainer"></span><br>
+<button id="updateData" class="btn btn-primary">Update User Data</button>
 
 

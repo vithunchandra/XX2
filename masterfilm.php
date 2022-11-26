@@ -36,7 +36,7 @@
             <div class="container-fluid w-50 p-3 border border-3 rounded-3 mx-auto">
                 <h4 class="text-center">Add Film Form</h4>
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="jnamaFilm" placeholder="Bocchi The Rock Movie">
+                    <input type="text" class="form-control" id="namaFilm" placeholder="Bocchi The Rock Movie">
                     <label for="namaFilm">Film Name</label>
                 </div>
                 <div class="container-fluid mb-3">
@@ -103,9 +103,8 @@
         
 
         <div class="popup_container">
-            <div class="popup">
-                <Button id="closePopup">Close</Button>
-                <div id="updateContainer">
+            <div class="popup" style="overflow-y: auto;">
+                <div id="updateContainer" class="container-fluid">
 
                 </div>
             </div>
@@ -114,7 +113,7 @@
         <script>
             var addButton = document.getElementById("addFilm");
             var filmContainer = document.getElementById("filmContainer");
-            var closePopup = document.getElementById("closePopup");
+            var closePopup
 
             addButton.addEventListener("click", insertIntoFilm);
             updateFilm();
@@ -225,6 +224,8 @@
 
             function bindUpdateDataButton(){
                 var updateFilmDataButton = document.getElementById("updateFilmDataButton");
+                closePopup = document.getElementById("closePopup");
+                closePopup.addEventListener("click", hidePopup);
                 updateFilmDataButton.addEventListener("click", updateFilmData);
                 changeCheckboxState();
             }
@@ -236,7 +237,6 @@
                 var akhir = document.getElementById("akhirUpdate").value;
                 
                 var old = $("#old").val();
-                alert(old);
                 var file_data = $("#gambarUpdate").prop("files")[0];
                 if(typeof file_data !== 'undefined'){
                     gambar = file_data.name;
@@ -309,8 +309,6 @@
                 popup.style.display = "none";
                 updateFilm();
             }
-
-            closePopup.addEventListener("click", hidePopup);
             // setInterval(updateFilm, 500);
         </script>
     </body>
