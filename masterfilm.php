@@ -22,34 +22,85 @@
         <script src = "jquery-3.6.1.min.js"></script>
     </head>
     <body>
-        <h1>Welcome Admin</h1>
-        <form action="Controller/controller_member.php" method = "POST">
-            <button name="logout" type="submit">Logout</button>
-            <button name="masterUser" type="submit">Master User</button>
-            <button name="masterFilm" type="submit">Master Film</button>
-            <button name="masterSchedule" type="submit">Master Schedule</button>
+    <h1 class="text-center">Welcome Admin</h1>
+        <form action="Controller/controller_member.php" method = "POST" class="text-center">
+            <button name="logout" type="submit" class="btn btn-outline-primary">Logout</button>
+            <button name="masterUser" type="submit" class="btn btn-outline-primary">Master User</button>
+            <button name="masterFilm" type="submit" class="btn btn-primary">Master Film</button>
+            <button name="masterSchedule" type="submit" class="btn btn-outline-primary">Master Schedule</button>
         </form>
-        <h2>Master Film</h2>
-        <h3>Add Film</h3>
-        Nama Film : <input type="text" id="namaFilm"><br>
-        Tanggal Mulai : <input type="date" id="mulai"><br>
-        Tanggal Akhir : <input type="date" id="akhir"><br>
-        Gambar Film : <input id="gambar" type="file" name="gambar" /> <br><br>
-        Trailer Link : <input type="text" id="trailer"><br>
-        Sinopsis : <textarea id="sinopsis" cols="30" rows="10"></textarea><br>
-        Genre : <br>
-        <input type="checkbox" class="genre" value="1"> Action <br>
-        <input type="checkbox" class="genre" value="2"> Horror
-        <input type="checkbox" class="genre" value="3"> Romance <br>
-        <input type="checkbox" class="genre" value="4"> Family
-        <input type="checkbox" class="genre" value="5"> Comedy<br>
-        <input type="checkbox" class="genre" value="6"> Shounen
-        <input type="checkbox" class="genre" value="7"> Thriller<br>
-        <span id="messageContainer"></span> <br>
-        <button id="addFilm">Add Film</button>
-        <table id="filmContainer" border="1" class="table">
 
-        </table>
+        <div class="container-fluid px-3">
+            <h2 class="text-center m-4">Master Film</h2>
+
+            <div class="container-fluid w-50 p-3 border border-3 rounded-3 mx-auto">
+                <h4 class="text-center">Add Film Form</h4>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="jnamaFilm" placeholder="Bocchi The Rock Movie">
+                    <label for="namaFilm">Film Name</label>
+                </div>
+                <div class="container-fluid mb-3">
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="date" class="form-control" id="mulai" placeholder="Tanggal Mulai">
+                                <label for="mulai">Tanggal Mulai Tayang</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="date" class="form-control" id="akhir" placeholder="Tanggal Akhir">
+                                <label for="akhir">Tanggal Akhir Tayang</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-group mb-3">
+                    <input type="file" class="form-control" id="gambar">
+                    <label class="input-group-text" for="gambar">Upload</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="trailer">
+                    <label for="trailer">Trailer Film</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <textarea class="form-control"id="sinopsis" style="height: 100px"></textarea>
+                    <label for="sinopsis">Sinopsis Film</label>
+                </div>
+
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-auto">
+                            Genre :
+                        </div>
+                        <div class="col">
+                            <input type="checkbox" class="genre form-check-input" value="1"> Action
+                            <input type="checkbox" class="genre form-check-input" value="2"> Horror
+                            <input type="checkbox" class="genre form-check-input" value="3"> Romance <br>
+                            <input type="checkbox" class="genre form-check-input" value="4"> Family
+                            <input type="checkbox" class="genre form-check-input" value="5"> Comedy
+                            <input type="checkbox" class="genre form-check-input" value="6"> Shounen <br>
+                            <input type="checkbox" class="genre form-check-input" value="7"> Thriller
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="container-fluid text-center">
+                    <span id="messageContainer"></span> <br>
+                    <button id="addFilm" class="btn btn-primary">Add Film</button>
+                </div>
+                
+            </div>
+            
+
+            <div id="filmContainer" class="container-fluid p-3">
+
+            </div>
+        </div>
+        
 
         <div class="popup_container">
             <div class="popup">
@@ -260,7 +311,7 @@
             }
 
             closePopup.addEventListener("click", hidePopup);
-            setInterval(updateFilm, 500);
+            // setInterval(updateFilm, 500);
         </script>
     </body>
 </html>

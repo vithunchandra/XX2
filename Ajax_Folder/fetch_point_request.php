@@ -18,8 +18,8 @@
             <td><?= $value['id_member'] ?></td>
             <td><?= $value['jumlah_point'] ?></td>
             <td>
-                <button class="accept-button" value="<?= $value['id_request'] ?>">Accept</button>
-                <button class="cancel-button" value="<?= $value['id_request'] ?>">Cancel</button>
+                <button class="accept-button btn btn-info" value="<?= $value['id_request'] ?>">Accept</button>
+                <button class="cancel-button btn btn-danger" value="<?= $value['id_request'] ?>">Cancel</button>
             </td>
         </tr>  
     <?php } ?>

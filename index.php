@@ -17,6 +17,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
+
 <link rel="stylesheet" href="bootstrap-5.2.1-dist/css/bootstrap.css">
 <link rel="stylesheet" href="mycss.css">
 <style>
@@ -66,7 +67,23 @@
         </form>
         </div>
     </div>
-        
+    
+    <!-- <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
+        <div class="carousel-indicators" id="indicators">
+            
+        </div>
+        <div class="carousel-inner" id="caraousel-ajax">
+            
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div> -->
 
 
     <h1 id = 'title'>Title</h1>
@@ -132,10 +149,41 @@
 </body>
 </html>
 
+<script src="bootstrap-5.2.1-dist/js/bootstrap.js"></script>
 <script src="ajax.js"></script>
 <script>
     var is_now_playing = 1;
     var id_member = document.getElementById("id_member").value;
+
+    // function refresh(responseNow) {
+    //     var movie_list = document.getElementById('caraousel-ajax');
+    //     var indicators = document.getElementById("indicators");
+    //     movie_list.innerHTML = "";
+
+    //     var refreshContent = '';
+    //     for(var i=0; i<responseNow.length; i++) {
+    //         var data = "data-bs-slide-to=" + (i) + "";
+    //         if(i == 0){
+    //             data += " Class=active";
+    //         }
+    //         indicators.innerHTML += '<button type="button" data-bs-target="#carouselExampleCaptions" '+ data +'></button>';
+    //     }
+    //     for(var i = 0;i < responseNow.length;i++) {
+    //         var active = "";
+    //         if(i == 0){
+    //             active = " active";
+    //         }
+    //         refreshContent += '<div class="carousel-item' + active + '"' + '>';
+    //             refreshContent += '<img src="Gambar/' + responseNow[i]['image_path'] + '"' + ' class=\"d-block w-100 background-cover\" alt=\"...\">';
+    //             '<div class="carousel-caption d-none d-md-block">';
+    //                 refreshContent += '<h5>' + responseNow[i]['nama_film'] + '</h5>';
+    //                 refreshContent += '<a  href="detail_film.php?id='+responseNow[i]['id_film']+'" class="btn">Detail</a>';
+    //             refreshContent += '</div>';
+    //         refreshContent += '</div>';
+    //     }
+    //     movie_list.innerHTML = refreshContent;
+    // }
+
     function refresh(responseNow) {
         var movie_list = document.getElementById('movie_list');
         movie_list.innerHTML = "";

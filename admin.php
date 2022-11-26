@@ -21,22 +21,23 @@
         <title>Document</title>
     </head>
     <body>
-        <h1>Welcome Admin</h1>
-        <form action="Controller/controller_member.php" method = "POST">
-            <button name="logout" type="submit">Logout</button>
-            <button name="masterUser" type="submit">Master User</button>
-            <button name="masterFilm" type="submit">Master Film</button>
-            <button name="masterSchedule" type="submit">Master Schedule</button>
+        <h1 class="text-center">Welcome Admin</h1>
+        <form action="Controller/controller_member.php" method = "POST" class="text-center">
+            <button name="logout" type="submit" class="btn btn-outline-primary">Logout</button>
+            <button name="masterUser" type="submit" class="btn btn-outline-primary">Master User</button>
+            <button name="masterFilm" type="submit" class="btn btn-outline-primary">Master Film</button>
+            <button name="masterSchedule" type="submit" class="btn btn-outline-primary">Master Schedule</button>
         </form>
         <h2>Master User</h2>
-        <button id="user_menu">User Menu</button> <button id="point_menu">Point Menu</button>
-        <table id="ajaxContainer" border="1" class="table">
+        <button id="user_menu" class="btn btn-success">User Menu</button> <button id="point_menu" class="btn btn-success">Point Menu</button>
+        <div class="m-4"></div>
+        <table id="ajaxContainer" border="1" class="table table-stripped text-center">
 
         </table>
 
         <div class="popup_container">
-            <div class="popup">
-                <Button id="closePopup">Close</Button>
+            <div class="popup text-center">
+                <img src="Assets/close.png" class="close-button" id="closePopup">
                 <div id="updateContainer">
 
                 </div>
@@ -48,15 +49,18 @@
             var closePopupButton = document.getElementById("closePopup");
             var userMenu = document.getElementById("user_menu");
             var pointMenu = document.getElementById("point_menu");
+            var userMenuInterval, pointMenuInterval;
             
             function showUserMenu(){
                 updateUser();
-                setInterval(updateUser, 500);    
+                userMenuInterval = setInterval(updateUser, 500);
+                clearInterval(pointMenuInterval); 
             }
 
             function showPointMenu(){
                 updatePoint();
-                setInterval(updatePoint, 500);
+                pointMenuInterval = setInterval(updatePoint, 500);
+                clearInterval(userMenuInterval);
             }
 
             function updatePoint(){
