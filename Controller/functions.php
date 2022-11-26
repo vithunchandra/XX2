@@ -15,7 +15,7 @@
     function fetchScalar($query){
         global $conn;
         $rawData = $conn->query($query);
-        $data = mysqli_fetch_column($rawData);
+        $data = mysqli_fetch_column($rawData,0);
 
         return $data;
     }
