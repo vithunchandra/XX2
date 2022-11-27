@@ -7,153 +7,195 @@
             header("Location:admin.php");
         }else{
             $userData = $_SESSION['login'];
+            echo "<script>var id_member = ". $userData['id_member'] .";</script>";
         }
     }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Document</title>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-<link rel="stylesheet" href="bootstrap-5.2.1-dist/css/bootstrap.css">
-<link rel="stylesheet" href="mycss.css">
-<style>
-    form {
-        display: inline;
-    } 
-</style>
+  <title>PhotoFolio Bootstrap Template - Index</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <!-- <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon"> -->
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Cardo:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+  <!-- <link rel = "stylesheet" href = "mycss.css"> -->
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+  <!-- =======================================================
+  * Template Name: PhotoFolio - v1.1.1
+  * Template URL: https://bootstrapmade.com/photofolio-bootstrap-photography-website-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
 </head>
-<body class="black">
-    <div class="header">
-        <h1 class="title">XX</h1>
-        <h1 class="title2">2</h1>
-        <div class="buton">
-        <ul> 
-        <li onclick = "now_playing()" class=" hover-underline-animation">Now Playing</li>
-        <li onclick = "upcoming()"  class=" hover-underline-animation">Upcoming</li>
-        <li onclick = "showPopup()"  class=" hover-underline-animation">Topup</li>
-        <li class=" hover-underline-animation"> <a class="nounder2" href="theater_schedule.php">Theater</a> </li>
-      </ul>
-        
-        </div>
 
-        
-        
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid d-flex align-items-center justify-content-between">
+
+      <a href="index.php" class="logo d-flex align-items-center  me-auto me-lg-0">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.png" alt=""> -->
+        <!-- <i class="bi bi-camera"></i> -->
+        <h1>XX2</h1>
+      </a>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          
+          <li><a onclick="now_playing()" href="#">Now Playing</a></li>
+          <li><a onclick="upcoming()" href="#">Upcoming</a></li>
+        </ul>
+      </nav><!-- .navbar -->
+
+      <div class="header-social-links">
         <?php 
         if(isset($_SESSION['login'])) {
-            echo '<form action = "Controller/controller_member.php" method = "POST"><button class="btn-hover color-7 " name = "logout" type = "submit">logout</button></form>';
+            echo '<a href = "#"><button class="btn btn-info" data-toggle="modal" data-target="#exampleModal">Top Up</button></a>';
+            echo '<a href = "#"><form action = "Controller/controller_member.php" method = "POST"><button class="btn btn-info" name = "logout" type = "submit">logout</button></form></a>';
         } else {
-            echo '<button class="btn-hover color-72"> <a class="nounder" href = "login.php">Login</a></button>';
+            echo '<a href = "login.php"><button class="btn btn-info">Login</button></a>';
         }
         ?>
-
-    </div>
-
-    <input type="text" id="id_member" value="<?= empty($userData['id_member']) ? "" : $userData['id_member'] ?>" hidden>
-
-    <div class="main">
-        <h5>Search</h5>
-        <label>Title : </label> 
         
-
         
-        <div class="search-container">
-        <form action="/search" method="get">
-            <input class="search expandright" id="search_key" type="search" name="q" placeholder="Search">
-            <label class="buttonsearch searchbutton" for="search_key"><span class="mglass">&#9906;</span></label>
-        </form>
-        </div>
+      </div>
+      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+
     </div>
-    
-    <!-- <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
-        <div class="carousel-indicators" id="indicators">
-            
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="hero d-flex flex-column justify-content-center align-items-center" data-aos="fade" data-aos-delay="1500">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-6 text-center">
+          <h2>Welcome To XX2</h2>
+          <h3 id = 'title'></h3>
+          <input placeholder="Search Title" onchange="search()" id = "search_key" type="text">
         </div>
-        <div class="carousel-inner" id="caraousel-ajax">
-            
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
+      </div>
+    </div>
+  </section><!-- End Hero Section -->
+
+  <main id="main" data-aos="fade" data-aos-delay="1500">
+
+    <!-- ======= Gallery Section ======= -->
+    <section id="gallery" class="gallery">
+      <div class="container-fluid">
+        <div id = 'movie_list'></div>
+      </div>
+    </section><!-- End Gallery Section -->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>PhotoFolio</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/photofolio-bootstrap-photography-website-template/ -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- start animation -->
+  <div id="preloader">
+    <div class="line"></div>
+  </div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Top Up</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div> -->
-
-
-    <h1 id = 'title'>Title</h1>
-    <div id="movie_list"></div>
-
-    <div id="topup_popup" class="popup_container">
-        <div class="popup">
-            <Button id="closePopup">Close</Button>
-            <div class="d-flex flex-wrap w-100">
-                <div class="w-33 text-center">
-                    <img src="Assets/point.png" class="w-50">
-                    <h2>100 Points</h2>
-                    <button class="btn btn-primary buy-button" value="100">Buy</button>
-                </div>
-                <div class="w-33 text-center">
-                    <img src="Assets/point.png" class="w-50">
-                    <h2>500 Points</h2>
-                    <button class="btn btn-primary buy-button" value="500">Buy</button>
-                </div>
-                <div class="w-33 text-center">
-                    <img src="Assets/point.png" class="w-50">
-                    <h2>1000 Points</h2>
-                    <button class="btn btn-primary buy-button" value="1000">Buy</button>
-                </div>
-                <div class="w-33 text-center">
-                    <img src="Assets/point.png" class="w-50">
-                    <h2>1500 Points</h2>
-                    <button class="btn btn-primary buy-button" value="1500">Buy</button>
-                </div>
-                <div class="w-33 text-center">
-                    <img src="Assets/point.png" class="w-50">
-                    <h2>3000 Points</h2>
-                    <button class="btn btn-primary buy-button" value="3000">Buy</button>
-                </div>
-                <div class="w-33 text-center">
-                    <img src="Assets/point.png" class="w-50">
-                    <h2>5000 Points</h2>
-                    <button class="btn btn-primary buy-button" value="5000">Buy</button>
+      </div>
+      <div class="modal-body">
+        <div id="topup_popup" class="popup_container">
+            <div class="popup">
+                <div class="d-flex flex-wrap w-100" style="color:black;">
+                    <div class="w-33 text-center">
+                        <h2 style = 'text-align:center;'>Top Up</h2>
+                    </div>
+                    <div class="w-33 text-center">
+                        <img src="Assets/point.png" class="w-50">
+                    </div>
+                    <div class="w-33 text-center" style="margin-left: auto;margin-right: auto;">
+                        <input type="text" id = 'jumlah_req'>
+                    </div>
                 </div>
             </div>
         </div>
+      </div>
+      <div class="modal-footer">
+        <button onclick="requestPoint()" type="button" class="btn btn-primary" data-dismiss="modal">Order</button>
+      </div>
     </div>
+  </div>
+</div>
 
-    <div class="modal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>Modal body text goes here.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Save changes</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-            </div>
-        </div>
-    </div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
 </body>
+
 </html>
 
-<script src="bootstrap-5.2.1-dist/js/bootstrap.js"></script>
-<script src="ajax.js"></script>
+
 <script>
     var is_now_playing = 1;
-    var id_member = document.getElementById("id_member").value;
+    // var id_member = document.getElementById("id_member").value;
 
     function refresh(responseNow) {
         var movie_list = document.getElementById('caraousel-ajax');
@@ -189,15 +231,33 @@
         movie_list.innerHTML = "";
 
         var refreshContent = '';
+        var needEndDiv = 1;
         for(var i = 0;i < responseNow.length;i++) {
-        refreshContent += '<div class="card" style="width: 18rem;float:left;">';
-            refreshContent += '<img width = "200px" height = "300px" class="card-img-top" src="Gambar/' + responseNow[i]['image_path'] +'" alt="'+responseNow[i]['nama_film']+'">';
-            refreshContent += '<div class="card-body">';
-            refreshContent += '<h5 class="card-title">'+ responseNow[i]['nama_film'] +'</h5>';
-            refreshContent += '<a  href="detail_film.php?id='+responseNow[i]['id_film']+' " class="btn ">Detail</a>';
-            refreshContent += '</div>';
-        refreshContent += '</div>';
+        //<a  href="detail_film.php?id='+responseNow[i]['id_film']+' "
+        if(i % 4 == 0) {
+            refreshContent += '<div class="row gy-4 justify-content-center">';
+            needEndDiv = 1;
         }
+        refreshContent += '<div class="col-xl-3 col-lg-4 col-md-6">';
+        refreshContent += '<a href="detail_film.php?id='+responseNow[i]['id_film']+' ">';
+            refreshContent += '<div class="gallery-item h-100">';
+                refreshContent += '<img style = "width:500px;height:500px" src="Gambar/' + responseNow[i]['image_path'] +'" class="img-fluid" alt="">';
+                // refreshContent += '<img  src="assets/img/gallery/gallery-1.jpg" class="img-fluid" alt="">';
+                refreshContent += '<div class="gallery-links d-flex align-items-center justify-content-center">';
+                    refreshContent += '<h3 style = "text-align:center;">'+responseNow[i]['nama_film']+'</h3>'
+                refreshContent += '</div>';
+            refreshContent += '</div>';
+        refreshContent = refreshContent + "</a>";
+        refreshContent += '</div>';
+        if(i % 4 == 3) {
+            refreshContent += '</div>';
+            needEndDiv = 0;
+        }
+        }
+        if(needEndDiv) {
+            refreshContent += '</div>';
+        }
+        
         movie_list.innerHTML = refreshContent;
     }
 
@@ -234,7 +294,7 @@
     }
 
     function search() {
-        document.getElementById('title').innerHTML = "Now Playing!";
+        //document.getElementById('title').innerHTML = "Now Playing!";
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
@@ -254,38 +314,24 @@
         xhttp.send();
     }
 
-    function showPopup(){
-        if(id_member.length > 0){
-            var popup = document.querySelector(".popup_container");
-            popup.style.display = "flex";
-        }else{
-            alert("You must login first");
-        }
+    function requestPoint() {
+        var xhttp = new XMLHttpRequest();
+        var jumlahReq = document.getElementById('jumlah_req').value;
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+            //summary.innerHTML = summary.innerHTML + xhttp.responseText;
+            console.log(xhttp.responseText);
+            document.getElementById('jumlah_req').value = 0;
+            }
+        };
+        xhttp.open("GET", "Controller/controller_member.php?request_point=1&jumlah=" + jumlahReq + "&id_user=" + id_member   );
+        xhttp.send();
     }
-
-    function hidePopup(){
-        var popup = document.querySelector(".popup_container");
-        popup.style.display = "none";
-    }
-
-    function processBuyPoints(){
-        var data = `saldo=${this.value}&id_member=${id_member}`;
-        var crudObject = new CrudObject("Ajax_Folder/point_request.php", data);
-        crud(crudObject, buyCallback);
-    }
-
-    function buyCallback(){
-        alert("Your Request is Waiting For Confirmation");
-    }
-
-    document.getElementById("closePopup").addEventListener("click", hidePopup);
-
-    listBuy = document.querySelectorAll(".buy-button");
-    for(var i=0; i<listBuy.length; i++){
-        listBuy[i].addEventListener("click", processBuyPoints);
-    }
-
     now_playing();
+
+    
+
+    
 
 
 </script>
