@@ -54,6 +54,6 @@
     }elseif(isset($_POST['masterUser'])){
         header("Location: ../admin.php");
     }elseif(isset($_POST['masterSchedule'])){
-        header("Location: ../masterschedule.php");
+        header("Location: ../masterschedule2.php");
     }
 ?>

@@ -1,47 +1,45 @@
 <?php 
     require "../Controller/functions.php";
+    
+    $id_theater = $_POST['id_theater'];
+    $id_session = $_POST['id_session'];
 
     $filmData = fetchData("SELECT id_film as id, nama_film AS nama, sinopsis, image_path AS image, trailer_link AS trailer, 
     start_date AS start, end_date AS end, status FROM film");
 ?>
 
-<tr>
-    <th>No</th>
-    <th>Nama</th>
-    <th>Start Date</th>
-    <th>End Date</th>
-    <th>Genre</th>
-    <th>Image</th>
-    <th>Trailer</th>
-    <th>Sinopsis</th>
-    <th>Action</th>
-</tr>
-
-<?php
-    $counter = 1;
-    foreach($filmData as $film) {
+<?php 
+    foreach($filmData as $film){
         if($film['status']){ ?>
-            <tr>
-                <td><?= $counter ?></td>
-                <td><?= $film['nama'] ?></td>
-                <td><?= $film['start'] ?></td>
-                <td><?= $film['end'] ?></td>
-                <td>
-                    <ul>
-                        <?php
-                            $currentID = $film['id'];
-                            $genreData = fetchData("SELECT nama_genre FROM film_genre fg JOIN genre g ON g.id_genre = fg.id_genre WHERE id_film = '$currentID'");
-                            foreach($genreData as $genre){ ?>
-                                <li><?= $genre['nama_genre'] ?></li>
+            <div class="item-container d-flex justify-content-center align-items-center w-100 border-top border-2 mx-auto">
+                <div class="item-img-container w-20 text-center">
+                    <img src="Gambar/<?= $film['image'] ?>" class="film-image"> <br>
+                </div>
+                <div class="item-detail w-80 p-3">
+                    <div class="row">
+                        <div class="col-8">
+                            <p class="fs-3 fw-bold"><?= $film['nama'] ?></p>
+                        </div>
+                        <div class="col text-end">
+                            <span class="fw-bold"><?= $film['start'] ?> - <?= $film['end'] ?> </span>
+                        </div>
+                    </div>
+                    <span class="fw-bold text-success">
+                    Genre :  
+                    <?php
+                        $currentID = $film['id'];
+                        $genreData = fetchData("SELECT nama_genre FROM film_genre fg JOIN genre g ON g.id_genre = fg.id_genre WHERE id_film = '$currentID'");
+                        foreach($genreData as $key => $genre){ ?>
+                            <?= $genre['nama_genre'] ?>
+                            <?php if($key != array_key_last($genreData)){ ?>
+                                <?= ", " ?>
                             <?php } ?>
-                    </ul>
-                </td>
-                <td><img src="Gambar/<?= $film['image'] ?>" width="50px"></td>
-                <td><?= $film['trailer'] ?></td>
-                <td><?= $film['sinopsis'] ?></td>
-                <td>
-                    <button class="chooseFilm" value="<?= $film['id']."-".$film['nama'] ?>">Pick</button>
-                </td>
-            </tr>
-        <?php $counter++; } ?>
+                        <?php } ?> </span> <br>
+                    Trailer : <?= $film['trailer'] ?> <br>
+                    Sinopsis : <?= $film['sinopsis'] ?> <br><br>
+                    <button class="choooseFilm btn btn-sucess" value="<?= $id_theater."-".$id_session."-".$film['id'] ?>">Add to Schedule</button>
+                </div>
+            </div>
+        <?php } ?>
     <?php } ?>
+    

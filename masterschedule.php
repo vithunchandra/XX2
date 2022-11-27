@@ -7,14 +7,9 @@
         }
     }
 
-    $filmName = "";
-    $filmID = "";
-    if(isset($_POST['filmName'])){
-        $filmName = $_POST['filmName'];
-    }
-    if(isset($_POST['filmID'])){
-        $filmID = $_POST['filmID'];
-    }
+    $monday = date("Y-m-d", strtotime("monday this week"));
+    $sunday = date("Y-m-d", strtotime("sunday this week"));
+
 ?>
 
 <!DOCTYPE html>
@@ -28,26 +23,38 @@
         <title>Document</title>
     </head>
     <body>
-        <h1>Welcome Admin</h1>
-        <form action="Controller/controller_member.php" method = "POST">
-            <button name="logout" type="submit">Logout</button>
-            <button name="masterUser" type="submit">Master User</button>
-            <button name="masterFilm" type="submit">Master Film</button>
-            <button name="masterSchedule" type="submit">Master Schedule</button>
+        <h1 class="text-center">Welcome Admin</h1>
+        <form action="Controller/controller_member.php" method = "POST" class="text-center">
+            <button name="logout" type="submit" class="btn btn-outline-primary">Logout</button>
+            <button name="masterUser" type="submit" class="btn btn-outline-primary">Master User</button>
+            <button name="masterFilm" type="submit" class="btn btn-primary">Master Film</button>
+            <button name="masterSchedule" type="submit" class="btn btn-outline-primary">Master Schedule</button>
         </form>
         <h2>Master Schedule</h2>
-            Film : <input id="filmName" type="text" disabled value=<?= empty($filmName) ? "" : $filmName ?>> <button id="chooseFilm">Choose Film...</button> <br>
-            <input id="filmID" type="text" hidden value=<?= empty($filmID) ? "" : $filmID ?>> <br>
-            Broadcast Date : <input type="date" id="broadcast"> <br>
-            Sesi : <select name="session" id="session">
-                <option value="1">09:30:00 - 12:00:00</option>
-                <option value="2">12:30:00 - 15:00:00</option>
-                <option value="3">15:30:00 - 18:00:00</option>
-                <option value="4">18:30:00 - 21:00:00</option>
-                <option value="5">21:30:00 - 23:00:00</option>
-            </select><br>
-            <span id="messageContainer"></span> <br>
-            <button id="addSchedule">Add Schedule</button>
+        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+        <?php 
+            for($i=0; $i<6; $i++){
+                $dt = new DateTime($monday);
+                $dt->modify('+'.$i.' day'); ?>
+                
+                <input type="radio" class="btn-check" name="btnradio<?= '-'.$i ?>" id="btnradio<?= '-'.$i ?>" autocomplete="off" value="<?= $dt ?>" checked>
+                <label class="btn btn-outline-primary" for="btnradio<?= '-'.$i ?>">Radio 1</label>
+                
+            <?php } ?>
+        </div>
+
+        <!-- Film : <input id="filmName" type="text" disabled value=<?= empty($filmName) ? "" : $filmName ?>> <button id="chooseFilm">Choose Film...</button> <br>
+        <input id="filmID" type="text" hidden value=<?= empty($filmID) ? "" : $filmID ?>> <br>
+        Broadcast Date : <input type="date" id="broadcast"> <br>
+        Sesi : <select name="session" id="session">
+            <option value="1">09:30:00 - 12:00:00</option>
+            <option value="2">12:30:00 - 15:00:00</option>
+            <option value="3">15:30:00 - 18:00:00</option>
+            <option value="4">18:30:00 - 21:00:00</option>
+            <option value="5">21:30:00 - 23:00:00</option>
+        </select><br>
+        <span id="messageContainer"></span> <br>
+        <button id="addSchedule">Add Schedule</button> -->
         <h3>Schedule List</h3>
         <table id="schedulContainer" border="1" class="table">
 

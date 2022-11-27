@@ -155,34 +155,34 @@
     var is_now_playing = 1;
     var id_member = document.getElementById("id_member").value;
 
-    // function refresh(responseNow) {
-    //     var movie_list = document.getElementById('caraousel-ajax');
-    //     var indicators = document.getElementById("indicators");
-    //     movie_list.innerHTML = "";
+    function refresh(responseNow) {
+        var movie_list = document.getElementById('caraousel-ajax');
+        var indicators = document.getElementById("indicators");
+        movie_list.innerHTML = "";
 
-    //     var refreshContent = '';
-    //     for(var i=0; i<responseNow.length; i++) {
-    //         var data = "data-bs-slide-to=" + (i) + "";
-    //         if(i == 0){
-    //             data += " Class=active";
-    //         }
-    //         indicators.innerHTML += '<button type="button" data-bs-target="#carouselExampleCaptions" '+ data +'></button>';
-    //     }
-    //     for(var i = 0;i < responseNow.length;i++) {
-    //         var active = "";
-    //         if(i == 0){
-    //             active = " active";
-    //         }
-    //         refreshContent += '<div class="carousel-item' + active + '"' + '>';
-    //             refreshContent += '<img src="Gambar/' + responseNow[i]['image_path'] + '"' + ' class=\"d-block w-100 background-cover\" alt=\"...\">';
-    //             '<div class="carousel-caption d-none d-md-block">';
-    //                 refreshContent += '<h5>' + responseNow[i]['nama_film'] + '</h5>';
-    //                 refreshContent += '<a  href="detail_film.php?id='+responseNow[i]['id_film']+'" class="btn">Detail</a>';
-    //             refreshContent += '</div>';
-    //         refreshContent += '</div>';
-    //     }
-    //     movie_list.innerHTML = refreshContent;
-    // }
+        var refreshContent = '';
+        for(var i=0; i<responseNow.length; i++) {
+            var data = "data-bs-slide-to=" + (i) + "";
+            if(i == 0){
+                data += " Class=active";
+            }
+            indicators.innerHTML += '<button type="button" data-bs-target="#carouselExampleCaptions" '+ data +'></button>';
+        }
+        for(var i = 0;i < responseNow.length;i++) {
+            var active = "";
+            if(i == 0){
+                active = " active";
+            }
+            refreshContent += '<div class="carousel-item' + active + '"' + '>';
+                refreshContent += '<img src="Gambar/' + responseNow[i]['image_path'] + '"' + ' class=\"d-block w-100 background-cover\" alt=\"...\">';
+                '<div class="carousel-caption d-none d-md-block">';
+                    refreshContent += '<h5>' + responseNow[i]['nama_film'] + '</h5>';
+                    refreshContent += '<a  href="detail_film.php?id='+responseNow[i]['id_film']+'" class="btn">Detail</a>';
+                refreshContent += '</div>';
+            refreshContent += '</div>';
+        }
+        movie_list.innerHTML = refreshContent;
+    }
 
     function refresh(responseNow) {
         var movie_list = document.getElementById('movie_list');
