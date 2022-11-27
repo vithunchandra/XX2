@@ -45,6 +45,15 @@
         echo $saldo;
     }
 
+    if(isset($_GET['request_point'])) {
+        $jumlah = $_GET['jumlah'];
+        $user = $_GET['id_user'];
+        $sql = "INSERT INTO `point_request`(`id_member`, `jumlah_point`, `status`) 
+        VALUES ($user,$jumlah,0)";
+        $conn->query($sql);
+        echo "order sucess!";
+    }
+
     if(isset($_POST['logout'])) {
         unset($_SESSION['login']);
         header("Location:../index.php");
