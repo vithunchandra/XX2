@@ -21,155 +21,140 @@
         <link rel="stylesheet" href="bootstrap-5.2.1-dist/css/bootstrap.css">
         <link rel="stylesheet" href="mycss.css">
         <title>Document</title>
+
+        <style>
+            table {
+                table-layout: fixed;
+                width: 100%;
+            }
+
+            th, td{
+                width: 210px;
+                overflow: hidden;
+            }
+        </style>
     </head>
     <body>
         <h1 class="text-center">Welcome Admin</h1>
         <form action="Controller/controller_member.php" method = "POST" class="text-center">
             <button name="logout" type="submit" class="btn btn-outline-primary">Logout</button>
             <button name="masterUser" type="submit" class="btn btn-outline-primary">Master User</button>
-            <button name="masterFilm" type="submit" class="btn btn-primary">Master Film</button>
-            <button name="masterSchedule" type="submit" class="btn btn-outline-primary">Master Schedule</button>
+            <button name="masterFilm" type="submit" class="btn btn-outline-primary">Master Film</button>
+            <button name="masterSchedule" type="submit" class="btn btn-primary">Master Schedule</button>
         </form>
         <h2>Master Schedule</h2>
         <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
         <?php 
-            for($i=0; $i<6; $i++){
+            for($i=0; $i<7; $i++){
                 $dt = new DateTime($monday);
-                $dt->modify('+'.$i.' day'); ?>
+                $dt->modify('+'.$i.' day'); 
+                $time = $dt->format("Y-m-d"); ?>
                 
-                <input type="radio" class="btn-check" name="btnradio<?= '-'.$i ?>" id="btnradio<?= '-'.$i ?>" autocomplete="off" value="<?= $dt ?>" checked>
-                <label class="btn btn-outline-primary" for="btnradio<?= '-'.$i ?>">Radio 1</label>
+                <input type="radio" class="btn-check day-button" name="btnradio" id="btnradio<?= '-'.$i ?>" autocomplete="off" value="<?= $time ?>">
+                <label class="btn btn-outline-primary" for="btnradio<?= '-'.$i ?>"><?= $dt->format("l") ?></label>
                 
             <?php } ?>
         </div>
-
-        <!-- Film : <input id="filmName" type="text" disabled value=<?= empty($filmName) ? "" : $filmName ?>> <button id="chooseFilm">Choose Film...</button> <br>
-        <input id="filmID" type="text" hidden value=<?= empty($filmID) ? "" : $filmID ?>> <br>
-        Broadcast Date : <input type="date" id="broadcast"> <br>
-        Sesi : <select name="session" id="session">
-            <option value="1">09:30:00 - 12:00:00</option>
-            <option value="2">12:30:00 - 15:00:00</option>
-            <option value="3">15:30:00 - 18:00:00</option>
-            <option value="4">18:30:00 - 21:00:00</option>
-            <option value="5">21:30:00 - 23:00:00</option>
-        </select><br>
-        <span id="messageContainer"></span> <br>
-        <button id="addSchedule">Add Schedule</button> -->
-        <h3>Schedule List</h3>
-        <table id="schedulContainer" border="1" class="table">
+        <table id="schedule-table" border="1px" class="table align-middle text-center mt-4">
 
         </table>
 
         <div class="popup_container">
-            <div class="popup">
-                <Button id="closePopup">Close</Button>
-                <table id="filmContainer" border="1" class="table">
+            <div class="popup" style="overflow-y: auto; width: 80%;">
+                <button id="closePopup" class="btn btn-danger position-absolute top-0 end-0" style="border-radius: 0px; border-top-right-radius: 10px;">X</button>
+                <div id="filmContainer" class="container-fluid">
 
-                </table>
+                </div>
             </div>
         </div>
+
         <script src="ajax.js"></script>
         <script>
-            var chooseFilm = document.getElementById("chooseFilm");
-            var closePopup = document.getElementById("closePopup");
-            var addSchedule = document.getElementById("addSchedule");
+            var buttonRadio = document.querySelectorAll(".day-button");
+            var selectedSession , selectedTheater;
+            var closePopupButton = document.getElementById("closePopup");
 
-            function chooseFilmPopUp(){
+            function bindButtonRadio(){
+                for(var i=0; i<buttonRadio.length; i++){
+                    buttonRadio[i].addEventListener("change", getSchedule);
+                }
+            }
+
+            function getSchedule(){
+                var data = `date=${document.querySelector("input[name='btnradio']:checked").value}`;
+                var ajaxContainer = document.getElementById("schedule-table");
+                var fetchObject = new FetchObject("Ajax_Folder/fetch_schedule.php", ajaxContainer, bindScheduleAction, data);
+                fetch(fetchObject);
+            }
+
+            function bindScheduleAction(){
+                var chooseButton = document.querySelectorAll(".choose-film");
+                var deleteButton = document.querySelectorAll(".delete-film");
+
+                for(var i=0; i<chooseButton.length; i++){
+                    chooseButton[i].addEventListener("click", showPopUp);
+                }
+
+                for(var i=0; i<deleteButton.length; i++){
+                    deleteButton[i].addEventListener("click", deleteSchedule);
+                }
+            }
+
+            function showPopUp(){
                 var pop = document.querySelector(".popup_container");
                 pop.style.display = "flex";
-                updateFilm();
+                var rawdata = this.value.split("-");
+                var id_theater = rawdata[0];
+                var id_session = rawdata[1];
+                var data = `id_theater=${id_theater}&id_session=${id_session}`;
+
+                showFilm(data);
             }
 
-            function closeChooseFilmPopup(){
+            function closePopup(){
                 var pop = document.querySelector(".popup_container");
                 pop.style.display = "none";
+                getSchedule();
             }
 
-            function updateFilm(){
+            function showFilm(data){
                 var ajaxContainer = document.getElementById("filmContainer");
-                var fetchObject = new FetchObject("Ajax_Folder/fetchfilmtochoose.php", ajaxContainer, bindFilmChoose);
+                var fetchObject = new FetchObject("Ajax_Folder/fetchfilmtochoose.php", ajaxContainer, bindFilmChoose, data);
 
                 fetch(fetchObject);
             }
 
             function bindFilmChoose(){
-                var listChoose = document.querySelectorAll(".chooseFilm");
-                for(var i=0; i<listChoose.length; i++){
-                    listChoose[i].addEventListener("click", getFilm);
+                var chooseFilmButton = document.querySelectorAll(".chooseFilm");
+                for(var i=0; i<chooseFilmButton.length; i++){
+                    chooseFilmButton[i].addEventListener("click", addSchedule);
                 }
             }
 
-            function insertIntoSchedule(){
-                var filmID = document.getElementById("filmID").value;
-                var broadcast = document.getElementById("broadcast").value;
-                var session = document.getElementById("session").value;
-                document.getElementById("filmName").value = "";
-                document.getElementById("filmID").value = "";
-                document.getElementById("broadcast").value = "";
-                document.getElementById("session").value = "";
-                var data = `filmID=${filmID}&broadcast=${broadcast}&session=${session}`;
-                var crudObject = new CrudObject("Ajax_Folder/insertIntoSchedule.php", data);
-                var ajaxContainer = document.getElementById("messageContainer");
-                crud(crudObject, updateSchedule, ajaxContainer);
-            }
-
-            function updateSchedule(){
-                var ajaxContainer = document.getElementById("schedulContainer");
-                var fetchObject = new FetchObject("Ajax_Folder/fetchschedule.php", ajaxContainer, bindSchedule);
-
-                fetch(fetchObject, bindSchedule);
-            }
-
-            function bindSchedule(){
-                var listDelete = document.querySelectorAll(".deleteSchedule");
-                for(var i=0; i<listDelete.length; i++){
-                    listDelete[i].addEventListener("click", deleteSchedule);
-                }
-
-                var listCheckBox = document.querySelectorAll(".theater");
-                for(var i=0; i<listCheckBox.length; i++){
-                    listCheckBox[i].addEventListener("change", selectTheatre);
-                    var rawData = listCheckBox[i].value.split("-");
-                    var status = rawData[2];
-                    if(status == 1){
-                        listCheckBox[i].checked = true;
-                    }else{
-                        listCheckBox[i].checked = false;
-                    }
-                }
-            }
-
-            function selectTheatre(){
-                var rawData = this.value.split("-");
-                var theaterID = rawData[0];
-                var scheduleID = rawData[1];
-                var data = `theaterID=${theaterID}&scheduleID=${scheduleID}`;
-                var crudObject = new CrudObject("Ajax_Folder/theatercheckbox.php", data);
-                crud(crudObject);
+            function addSchedule(){
+                var rawdata = this.value.split("-");
+                var id_theater = rawdata[0];
+                var id_session = rawdata[1];
+                var id_film = rawdata[2];
+                var date = document.querySelector("input[name='btnradio']:checked").value;
+                var data = `id_theater=${id_theater}&id_session=${id_session}&id_film=${id_film}&date=${date}`;
+                var crudObject = new CrudObject("Ajax_Folder/add_schedule.php", data);
+                crud(crudObject, closePopup);
             }
 
             function deleteSchedule(){
-                var data = `scheduleID=${this.value}`;
-                var crudObject = new CrudObject("Ajax_Folder/deleteschedule.php", data);
-                crud(crudObject, updateSchedule);
+                var rawdata = this.value.split("-");
+                var id_theater = rawdata[0];
+                var id_schedule = rawdata[1];
+                var data = `id_theater=${id_theater}&id_schedule=${id_schedule}`;
+                var crudObject = new CrudObject("Ajax_Folder/delete_schedule.php", data);
+                crud(crudObject, getSchedule);
             }
 
-            function getFilm(){
-                var value = this.value;
-                var fields = value.split('-');
-                var id = fields[0];
-                var name = fields[1];
-                document.getElementById("filmName").value = name;
-                document.getElementById("filmID").value = id;
-                closeChooseFilmPopup();
-            }
-
-            chooseFilm.addEventListener("click", chooseFilmPopUp);
-            closePopup.addEventListener("click", closeChooseFilmPopup);
-            addSchedule.addEventListener("click", insertIntoSchedule);
-
-            updateSchedule();
-            setInterval(updateSchedule, 500);
+            bindButtonRadio();
+            buttonRadio[0].checked = true;
+            buttonRadio[0].dispatchEvent(new Event("change", {bubbles:true}));
+            closePopupButton.addEventListener("click", closePopup);
         </script>
     </body>
 </html>

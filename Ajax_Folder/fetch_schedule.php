@@ -32,7 +32,7 @@
                         $data = $schedule[0]; ?>
                         <img src="Gambar/<?= $data['image_path'] ?>" class="rounded" style="width: 200px;"> <br>
                         <span class="fw-bold"><?= $data['nama_film'] ?></span><br>
-                        <button class="btn btn-danger delete-film" value="<?= $row['id_theater'].'-'.$col['id_session'] ?>">Delete Film</button>
+                        <button class="btn btn-danger delete-film" value="<?= $row['id_theater'].'-'.$data['id_schedule'] ?>">Delete Film</button>
                     <?php }else{ ?>
                         <button class="btn btn-info choose-film" value="<?= $row['id_theater'].'-'.$col['id_session'] ?>">Choose Film</button>
                     <?php } ?>

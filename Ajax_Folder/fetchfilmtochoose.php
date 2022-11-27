@@ -7,7 +7,7 @@
     $filmData = fetchData("SELECT id_film as id, nama_film AS nama, sinopsis, image_path AS image, trailer_link AS trailer, 
     start_date AS start, end_date AS end, status FROM film");
 ?>
-
+<h1 class="display-6">Choose Film</h1>
 <?php 
     foreach($filmData as $film){
         if($film['status']){ ?>
@@ -37,7 +37,7 @@
                         <?php } ?> </span> <br>
                     Trailer : <?= $film['trailer'] ?> <br>
                     Sinopsis : <?= $film['sinopsis'] ?> <br><br>
-                    <button class="choooseFilm btn btn-sucess" value="<?= $id_theater."-".$id_session."-".$film['id'] ?>">Add to Schedule</button>
+                    <button class="chooseFilm btn btn-success" value="<?= $id_theater."-".$id_session."-".$film['id'] ?>">Add to Schedule</button>
                 </div>
             </div>
         <?php } ?>
