@@ -42,22 +42,26 @@
             <button name="masterFilm" type="submit" class="btn btn-outline-primary">Master Film</button>
             <button name="masterSchedule" type="submit" class="btn btn-primary">Master Schedule</button>
         </form>
-        <h2>Master Schedule</h2>
-        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-        <?php 
-            for($i=0; $i<7; $i++){
-                $dt = new DateTime($monday);
-                $dt->modify('+'.$i.' day'); 
-                $time = $dt->format("Y-m-d"); ?>
-                
-                <input type="radio" class="btn-check day-button" name="btnradio" id="btnradio<?= '-'.$i ?>" autocomplete="off" value="<?= $time ?>">
-                <label class="btn btn-outline-primary" for="btnradio<?= '-'.$i ?>"><?= $dt->format("l") ?></label>
-                
-            <?php } ?>
-        </div>
-        <table id="schedule-table" border="1px" class="table align-middle text-center mt-4">
 
-        </table>
+        <div class="container-fluid">
+            <h2>Master Schedule</h2>
+            <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+            <?php 
+                for($i=0; $i<7; $i++){
+                    $dt = new DateTime($monday);
+                    $dt->modify('+'.$i.' day'); 
+                    $time = $dt->format("Y-m-d"); ?>
+                    
+                    <input type="radio" class="btn-check day-button" name="btnradio" id="btnradio<?= '-'.$i ?>" autocomplete="off" value="<?= $time ?>">
+                    <label class="btn btn-outline-primary" for="btnradio<?= '-'.$i ?>"><?= $dt->format("l") ?></label>
+                    
+                <?php } ?>
+            </div>
+            <table id="schedule-table" border="1px" class="table align-middle text-center mt-4 shadow">
+
+            </table>
+        </div>
+        
 
         <div class="popup_container">
             <div class="popup" style="overflow-y: auto; width: 80%;">

@@ -18,7 +18,7 @@
 <?php 
     foreach($theater as $row){ ?>
         <tr>
-            <th>
+            <th class="fs-4 text-capitalize">
                 <?= $row['nama_theater'] ?>
             </th>
             <?php foreach($session as $col){

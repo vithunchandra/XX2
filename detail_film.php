@@ -112,7 +112,7 @@
 
     <!-- ======= End Page Header ======= -->
     <div class="page-header d-flex align-items-center">
-      <div class="container position-relative">
+      <div class="container position-relative shadow">
         <div class="row d-flex justify-content-center">
           <div class="col-lg-6 text-center">
             <h2> <?= $movie['nama_film'] ?> </h2>
@@ -129,7 +129,7 @@
     </div><!-- End Page Header -->
 
     <!-- ======= Gallery Single Section ======= -->
-    <section id="gallery-single" class="gallery-single">
+    <section id="gallery-single" class="gallery-single" style="background: linear-gradient( rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8) ), url(Gambar/<?= $movie['image_path'] ?>); background-size: cover;">
       <div class="container">
 
         <div class="position-relative h-100">
