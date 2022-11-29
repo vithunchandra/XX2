@@ -240,8 +240,8 @@
         }
         refreshContent += '<div class="col-xl-3 col-lg-4 col-md-6">';
         refreshContent += '<a href="detail_film.php?id='+responseNow[i]['id_film']+' ">';
-            refreshContent += '<div class="gallery-item h-100">';
-                refreshContent += '<img style = "width:500px;height:500px" src="Gambar/' + responseNow[i]['image_path'] +'" class="img-fluid" alt="">';
+            refreshContent += '<div class="gallery-item h-100 d-flex justify-content-center">';
+                refreshContent += '<img style = "height:400px" src="Gambar/' + responseNow[i]['image_path'] +'" class="img-fluid" alt="">';
                 // refreshContent += '<img  src="assets/img/gallery/gallery-1.jpg" class="img-fluid" alt="">';
                 refreshContent += '<div class="gallery-links d-flex align-items-center justify-content-center">';
                     refreshContent += '<h3 style = "text-align:center;">'+responseNow[i]['nama_film']+'</h3>'
