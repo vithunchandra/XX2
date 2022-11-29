@@ -7,6 +7,7 @@
     $filmData = fetchData("SELECT id_film as id, nama_film AS nama, sinopsis, image_path AS image, trailer_link AS trailer, 
     start_date AS start, end_date AS end, status FROM film");
 ?>
+
 <h1 class="display-6">Choose Film</h1>
 <?php 
     foreach($filmData as $film){

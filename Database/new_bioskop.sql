@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 22, 2022 at 02:30 PM
+-- Generation Time: Nov 29, 2022 at 02:22 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -71,8 +71,8 @@ CREATE TABLE `film` (
 --
 
 INSERT INTO `film` (`id_film`, `nama_film`, `sinopsis`, `image_path`, `trailer_link`, `start_date`, `end_date`, `status`) VALUES
-(4, 'Yuru Camp the Movie', 'The anime film will feature the familiar characters from the franchise now grown up, and reuniting to construct a campsite.', 'placeholder.jpg', 'https://www.youtube.com/watch?v=1GnPdVAJm5U', '2022-11-02', '2022-11-30', 1),
-(5, 'Sword Art Online: Progressive Movie - Kuraki Yuuya', 'Second Sword Art Online: Progressive movie.', 'placeholder.jpg', 'https://www.youtube.com/watch?v=MLWmlQmLQLw', '2022-12-01', '2022-12-31', 1),
+(4, 'Yuru Camp the Movie', 'The anime film will feature the familiar characters from the franchise now grown up, and reuniting to construct a campsite.', 'Yuru_Camp_Movie.jpg', 'https://www.youtube.com/watch?v=1GnPdVAJm5U', '2022-11-02', '2022-11-30', 1),
+(5, 'Sword Art Online: Progressive Movie - Kuraki Yuuya', 'Second Sword Art Online: Progressive movie.', 'swordartonline.jpg', 'https://www.youtube.com/watch?v=MLWmlQmLQLw', '2022-12-01', '2022-12-31', 1),
 (6, 'Bochi The Rock Movie', 'Yearning to make friends and perform live with a band, lonely and socially anxious Hitori \"Bocchi\" Gotou devotes her time to playing the guitar. On a fateful day, Bocchi meets the outgoing drummer Nijika Ijichi, who invites her to join Kessoku Band when their guitarist, Ikuyo Kita, flees before their first show. Soon after, Bocchi meets her final bandmate—the cool bassist Ryou Yamada.\n\nAlthough their first performance together is subpar, the girls feel empowered by their shared love for music, and they are soon rejoined by Kita. Finding happiness in performing, Bocchi and her bandmates put their hearts into improving as musicians while making the most of their fleeting high school days.', 'bocchi.jpg', 'https://www.youtube.com/watch?v=Fp7lnCp_LW0', '2022-11-17', '2022-12-23', 1);
 
 -- --------------------------------------------------------
@@ -92,14 +92,15 @@ CREATE TABLE `film_genre` (
 --
 
 INSERT INTO `film_genre` (`film_genre_id`, `id_genre`, `id_film`) VALUES
-(1, 3, 4),
-(2, 4, 4),
-(3, 5, 4),
-(4, 1, 5),
-(5, 3, 5),
-(6, 6, 5),
-(7, 4, 6),
-(8, 5, 6);
+(12, 4, 6),
+(13, 5, 6),
+(14, 6, 6),
+(19, 1, 5),
+(20, 3, 5),
+(21, 6, 5),
+(25, 3, 4),
+(26, 4, 4),
+(27, 5, 4);
 
 -- --------------------------------------------------------
 
@@ -166,7 +167,7 @@ CREATE TABLE `member` (
 --
 
 INSERT INTO `member` (`id_member`, `nama_member`, `email`, `user`, `pass`, `saldo`, `status`) VALUES
-(1, 'Budi', 'budi123@example.com', 'budi', '123', 4000, 1);
+(1, 'Budi', 'budi123@example.com', 'budi', '123', 4600, 1);
 
 -- --------------------------------------------------------
 
@@ -201,7 +202,14 @@ CREATE TABLE `schedule` (
 
 INSERT INTO `schedule` (`id_schedule`, `id_film`, `broadcast_date`, `id_session`, `status`) VALUES
 (2, 4, '2022-11-01', 3, 1),
-(3, 6, '2022-11-18', 2, 1);
+(3, 6, '2022-11-18', 2, 1),
+(4, 6, '2022-11-21', 1, 1),
+(5, 5, '2022-11-21', 2, 1),
+(7, 5, '2022-11-21', 3, 1),
+(12, 6, '2022-11-27', 2, 1),
+(13, 5, '2022-11-28', 1, 1),
+(14, 4, '2022-11-28', 4, 1),
+(15, 6, '2022-11-28', 3, 1);
 
 -- --------------------------------------------------------
 
@@ -270,7 +278,13 @@ INSERT INTO `theater_schedule` (`id_theater_schedule`, `id_theater`, `id_schedul
 (1, 1, 2, 1),
 (2, 2, 2, 1),
 (3, 1, 3, 1),
-(4, 2, 3, 0);
+(4, 2, 3, 0),
+(5, 2, 4, 1),
+(6, 1, 5, 1),
+(15, 1, 12, 1),
+(16, 1, 13, 1),
+(17, 1, 14, 1),
+(18, 2, 15, 1);
 
 --
 -- Indexes for dumped tables
@@ -371,7 +385,7 @@ ALTER TABLE `film`
 -- AUTO_INCREMENT for table `film_genre`
 --
 ALTER TABLE `film_genre`
-  MODIFY `film_genre_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `film_genre_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `genre`
@@ -401,7 +415,7 @@ ALTER TABLE `point_request`
 -- AUTO_INCREMENT for table `schedule`
 --
 ALTER TABLE `schedule`
-  MODIFY `id_schedule` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_schedule` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `session`
@@ -419,7 +433,7 @@ ALTER TABLE `theater`
 -- AUTO_INCREMENT for table `theater_schedule`
 --
 ALTER TABLE `theater_schedule`
-  MODIFY `id_theater_schedule` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_theater_schedule` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- Constraints for dumped tables
