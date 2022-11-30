@@ -31,7 +31,7 @@
         <h2>Master User</h2>
         <button id="user_menu" class="btn btn-success">User Menu</button> <button id="point_menu" class="btn btn-success">Point Menu</button>
         <div class="m-4"></div>
-        <table id="ajaxContainer" border="1" class="table table-stripped text-center">
+        <table id="ajaxContainer" border="1" class="table table-stripped text-center table-hover">
 
         </table>
 
