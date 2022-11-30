@@ -63,12 +63,12 @@
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="trailer">
+                    <input type="text" class="form-control" id="trailer" placeholder="Trailer Film">
                     <label for="trailer">Trailer Film</label>
                 </div>
 
                 <div class="form-floating mb-3">
-                    <textarea class="form-control"id="sinopsis" style="height: 100px"></textarea>
+                    <textarea class="form-control" id="sinopsis" style="height: 100px" placeholder="Sinopsis"></textarea>
                     <label for="sinopsis">Sinopsis Film</label>
                 </div>
 
@@ -362,7 +362,7 @@
             
             saveFilterButton.addEventListener("click", filter);
             resetFilterButton.addEventListener("click", resetFilterSettings);
-            searchInput.addEventListener("keydown", filter);
+            searchInput.addEventListener("keyup", filter);
         </script>
     </body>
 </html>
