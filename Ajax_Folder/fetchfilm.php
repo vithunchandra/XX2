@@ -1,17 +1,34 @@
 <?php 
     require "../Controller/functions.php";
 
-    $judul = $_POST['judul'];
-    $mulai = $_POST['mulai'];
-    $akhir = $_POST['akhir'];
-    $genre = $_POST['genre'];
-
-    $filter = "WHERE"
+    $filter = ""; 
     $queryMulai = "";
     $queryAkhir = "";
+    $queryGenre = "";
 
-    $filmData = fetchData("SELECT id_film as id, nama_film AS nama, sinopsis, image_path AS image, trailer_link AS trailer, 
-    start_date AS start, end_date AS end, status FROM film");
+    if(isset($_POST)){
+        if(!empty($_POST['judul'])){
+            $judul = $_POST['judul'];
+            $filter = " AND nama_film LIKE '%$judul%'";
+        }
+        if(!empty($_POST['mulai'])){
+            $mulai = toDate($_POST['mulai']);
+            $queryMulai = " AND start_date >= '$mulai'";
+        }
+        if(!empty($_POST['akhir'])){
+            $akhir = toDate($_POST['akhir']);
+            $queryAkhir = " AND end_date <= '$akhir'";
+        }
+        if(!empty($_POST['genre'])){
+            $genre = $_POST['genre'];
+            if($genre != 'all'){
+                $queryGenre = " AND id_genre = '$genre'";
+            }
+        }
+    }
+
+    $filmData = fetchData("SELECT DISTINCT f.id_film as id, nama_film AS nama, sinopsis, image_path AS image, trailer_link AS trailer, 
+    start_date AS start, end_date AS end, status FROM film f JOIN film_genre fg ON fg.id_film = f.id_film WHERE 1=1".$filter.$queryMulai.$queryAkhir.$queryGenre);
 ?>
 
 <?php 
