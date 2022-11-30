@@ -20,6 +20,7 @@
         <link rel="stylesheet" href="mycss.css">
         <title>Document</title>
         <script src = "jquery-3.6.1.min.js"></script>
+        <script src="bootstrap-5.2.1-dist/js/bootstrap.bundle.js"></script>
     </head>
     <body>
         <h1 class="text-center">Welcome Admin</h1>
@@ -72,11 +73,11 @@
                 </div>
 
                 <div class="container-fluid">
-                    <div class="row">
+                    <div class="row align-items-center">
                         <div class="col-auto">
                             Genre :
                         </div>
-                        <div class="col">
+                        <div class="col-auto">
                             <input type="checkbox" class="genre form-check-input" value="1"> Action
                             <input type="checkbox" class="genre form-check-input" value="2"> Horror
                             <input type="checkbox" class="genre form-check-input" value="3"> Romance <br>
@@ -96,6 +97,55 @@
             </div>
             
 
+            <div class="container-fluid mt-3">
+                <h1 class="display-4">Movie List</h1>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="row mb-2">
+                            <div class="col">
+                                <input type="text" id="searchInput" class="form-control w-100" placeholder="Search movie here...">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 text-end">
+                        <div class="dropdown">
+                            <button type="button" id="dropdownButton" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside">
+                                Filter
+                            </button>
+                            <div class="dropdown-menu p-4">
+                                <div class="w-100 d-flex justify-content-center align-items-center">
+                                    <div class="form-floating me-3">
+                                        <input type="date" class="form-control" id="mulaiFilter" placeholder="Tanggal Mulai">
+                                        <label for="mulai">Tanggal Mulai Tayang</label>
+                                    </div>
+                                    <div class="form-floating">
+                                        <input type="date" class="form-control" id="akhirFilter" placeholder="Tanggal Akhir">
+                                        <label for="akhir">Tanggal Akhir Tayang</label>
+                                    </div>
+                                </div>
+                                <div class="w-100 d-flex align-items-center mt-3">
+                                    <div style="width: 100px;">Genre :</div>
+                                    <select class="form-select" id="genreFilter">
+                                        <option selected value="all">All</option>
+                                        <option value="1">Action</option>
+                                        <option value="2">Horror</option>
+                                        <option value="3">Romance</option>
+                                        <option value="4">Family</option>
+                                        <option value="5">Comedy</option>
+                                        <option value="6">Shounen</option>
+                                        <option value="7">Thriller</option>
+                                    </select>
+                                </div>
+                                <div class="w-100 d-flex justify-content-center mt-3">
+                                    <button id="saveFilter" class="btn btn-info me-3">Save filter</button>
+                                    <button id="resetFilter" class="btn btn-danger">Reset filter</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div id="filmContainer" class="container-fluid p-3">
 
             </div>
@@ -113,7 +163,10 @@
         <script>
             var addButton = document.getElementById("addFilm");
             var filmContainer = document.getElementById("filmContainer");
-            var closePopup
+            var closePopup;
+            var mulaiFilter = document.getElementById("mulaiFilter");
+            var akhirFilter = document.getElementById("akhirFilter");
+            var genreFilter = document.getElementById("genreFilter");
 
             addButton.addEventListener("click", insertIntoFilm);
             updateFilm();
@@ -167,9 +220,13 @@
                 }
             }
 
-            function updateFilm(){
+            function updateFilm(data){
                 var ajaxContainer = document.getElementById("filmContainer");
-                var fetchObject = new FetchObject("Ajax_Folder/fetchfilm.php", ajaxContainer, bindFilmAction);
+                if(data == null){
+                    var fetchObject = new FetchObject("Ajax_Folder/fetchfilm.php", ajaxContainer, bindFilmAction);
+                }else{
+                    var fetchObject = new FetchObject("Ajax_Folder/fetchfilm.php", ajaxContainer, bindFilmAction, data);
+                }
 
                 fetch(fetchObject);
             }
@@ -286,7 +343,26 @@
                 popup.style.display = "none";
                 updateFilm();
             }
-            // setInterval(updateFilm, 500);
+
+            function filter(){
+                var data = `judul=${searchInput.value}&mulai=${mulaiFilter.value}&akhir=${akhirFilter.value}&genre=${genreFilter.value}`;
+                updateFilm(data);
+            }
+
+            function resetFilterSettings(){
+                mulaiFilter.value = "";
+                akhirFilter.value = "";
+                genreFilter.selectedIndex = 0;
+                filter();
+            }
+
+            var saveFilterButton = document.getElementById("saveFilter");
+            var resetFilterButton = document.getElementById("resetFilter");
+            var searchInput = document.getElementById("searchInput");
+            
+            saveFilterButton.addEventListener("click", filter);
+            resetFilterButton.addEventListener("click", resetFilterSettings);
+            searchInput.addEventListener("keydown", filter);
         </script>
     </body>
 </html>

@@ -1,14 +1,24 @@
 <?php 
     require "../Controller/functions.php";
 
+    $judul = $_POST['judul'];
+    $mulai = $_POST['mulai'];
+    $akhir = $_POST['akhir'];
+    $genre = $_POST['genre'];
+
+    $filter = "WHERE"
+    $queryMulai = "";
+    $queryAkhir = "";
+
     $filmData = fetchData("SELECT id_film as id, nama_film AS nama, sinopsis, image_path AS image, trailer_link AS trailer, 
     start_date AS start, end_date AS end, status FROM film");
 ?>
 
 <?php 
-    foreach($filmData as $film){
+    $counter = 0;
+    foreach($filmData as $key => $film){
         if($film['status']){ ?>
-            <div class="item-container d-flex justify-content-center align-items-center w-100 border-top border-2 mx-auto">
+            <div class="item-container d-flex justify-content-center align-items-center w-100 border-top border-2 mx-auto py-3">
                 <div class="item-img-container w-15 text-center">
                     <img src="Gambar/<?= $film['image'] ?>" class="film-image"> <br>
                 </div>
@@ -39,5 +49,5 @@
                 </div>
             </div>
         <?php } ?>
-    <?php } ?>
+    <?php $counter++;} ?>
     
