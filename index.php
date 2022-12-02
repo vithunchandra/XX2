@@ -74,6 +74,7 @@
           
           <li><a onclick="now_playing()" href="#">Now Playing</a></li>
           <li><a onclick="upcoming()" href="#">Upcoming</a></li>
+          <li><a href="theater_schedule.php">Schedule</a></li>
         </ul>
       </nav><!-- .navbar -->
 
