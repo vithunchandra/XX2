@@ -33,7 +33,7 @@
 
     if(isset($_GET['get_all_broadcast_date'])) {
         $sql = "select distinct s.broadcast_date as tgl from theater_schedule as ts,schedule as s where ts.id_schedule = s.id_schedule and 
-        ts.id_theater = ".$_GET['theater']." and s.id_film = ".$_GET['film']." and ts.status = 1;";
+        ts.id_theater = ".$_GET['theater']." and s.id_film = ".$_GET['film']." and ts.status = 1 and s.broadcast_date >= NOW() ;";
 
         $result = fetch($sql);
         echo json_encode($result);
@@ -41,7 +41,7 @@
 
     if(isset($_GET['get_all_session'])) {
       $sql = "select ses.id_session as id,ses.session_start as starts,ses.session_end as ends from theater_schedule as ts,schedule as s,session as ses where ts.id_schedule = s.id_schedule and ses.id_session = s.id_session and 
-      ts.id_theater = ".$_GET['theater']." and s.id_film = ".$_GET['film']." and s.broadcast_date = ".$_GET['date']." and ts.status = 1;";
+      ts.id_theater = ".$_GET['theater']." and s.id_film = ".$_GET['film']." and s.broadcast_date = ".$_GET['date']." and ts.status = 1 and s.broadcast_date >= NOW();";
       
       // echo $sql;
       $result = fetch($sql);
@@ -63,17 +63,18 @@
       
 
       $id_now = fetch("SELECT (ifnull(max(id_nota),0) + 1) as new_id FROM `h_movie` WHERE 1;")[0]['new_id'] ;
-      $sql_header = "INSERT INTO `h_movie`(`id_nota`,`id_member`, `id_theater_schedule`, `buy_date`) 
-            VALUES ($id_now,$user,$id_theater_schedule,NOW())";
+      $sql_header = "INSERT INTO `h_movie`(`id_nota`,`id_member`, `id_theater_schedule`, `buy_date`,`total`) 
+            VALUES ($id_now,$user,$id_theater_schedule,NOW(),$total)";
       $sql_update_point = "UPDATE `member` SET `saldo`=((SELECT saldo from member where id_member = 1) - $total) WHERE `id_member` = $user";
       
       $conn->begin_transaction();
       try {
         $conn->query($sql_header);
 
+        $hargaNow = intval($total/count($seat));
         for($i = 0;$i < count($seat);$i++) {
-          $sql_desc = "INSERT INTO `d_movie`(`id_nota`, `seat_i`, `seat_j`) 
-            VALUES ($id_now,".$seat[$i][0].",".$seat[$i][1].")";
+          $sql_desc = "INSERT INTO `d_movie`(`id_nota`, `seat_i`, `seat_j`,`harga`) 
+            VALUES ($id_now,".$seat[$i][0].",".$seat[$i][1].",$hargaNow)";
           $conn->query($sql_desc);
         }
         

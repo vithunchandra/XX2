@@ -103,7 +103,7 @@
         <div class="col-lg-6 text-center">
           <h2>Welcome To XX2</h2>
           <h3 id = 'title'></h3>
-          <input placeholder="Search Title" onchange="search()" id = "search_key" type="text">
+          <input placeholder="Search Title" onkeyup="search()" id = "search_key" type="text">
         </div>
       </div>
     </div>

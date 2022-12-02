@@ -302,6 +302,7 @@
           seat = seatRep;
 
           var tempHTML = "";
+          tempHTML = tempHTML + "<div class='d-flex justify-content-around bg-secondary' style = 'padding:20px;'><h3>Layar</h3></div>";
           for(var i = 0;i < seat.length;i++) {
             tempHTML = tempHTML + "<div class='d-flex justify-content-around' style = 'padding:20px;'>";
             textNow = String.fromCharCode(65 + i);
