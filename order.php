@@ -337,7 +337,7 @@
       var xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function() {
           if (this.readyState == 4 && this.status == 200) {
-            document.getElementById('total').innerHTML = xhttp.responseText*jumlah_tiket;
+            document.getElementById('total').innerHTML = (xhttp.responseText*jumlah_tiket).toLocaleString();
           }
       };
 
@@ -378,7 +378,8 @@
     var xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function() {
           if (this.readyState == 4 && this.status == 200) {
-            document.getElementById('point').innerHTML = "point : " + xhttp.responseText;
+            var responseNum = parseInt(xhttp.responseText);
+            document.getElementById('point').innerHTML = "point : " + responseNum.toLocaleString();
           }
       };
       xhttp.open("GET", "Controller/controller_member.php?get_point=1&id=" +  userNow);
