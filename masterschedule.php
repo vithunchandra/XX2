@@ -41,6 +41,7 @@
             <button name="masterUser" type="submit" class="btn btn-outline-primary">Master User</button>
             <button name="masterFilm" type="submit" class="btn btn-outline-primary">Master Film</button>
             <button name="masterSchedule" type="submit" class="btn btn-primary">Master Schedule</button>
+            <button name="masterReport" type="submit" class="btn btn-outline-primary">Master Report</button>
         </form>
 
         <div class="container-fluid">
@@ -77,6 +78,7 @@
             var buttonRadio = document.querySelectorAll(".day-button");
             var selectedSession , selectedTheater;
             var closePopupButton = document.getElementById("closePopup");
+            var currentDate = "";
 
             function bindButtonRadio(){
                 for(var i=0; i<buttonRadio.length; i++){
@@ -86,6 +88,7 @@
 
             function getSchedule(){
                 var data = `date=${document.querySelector("input[name='btnradio']:checked").value}`;
+                currentDate = document.querySelector("input[name='btnradio']:checked").value;
                 var ajaxContainer = document.getElementById("schedule-table");
                 var fetchObject = new FetchObject("Ajax_Folder/fetch_schedule.php", ajaxContainer, bindScheduleAction, data);
                 fetch(fetchObject);
@@ -110,7 +113,7 @@
                 var rawdata = this.value.split("-");
                 var id_theater = rawdata[0];
                 var id_session = rawdata[1];
-                var data = `id_theater=${id_theater}&id_session=${id_session}`;
+                var data = `id_theater=${id_theater}&id_session=${id_session}&date=${currentDate}`;
 
                 showFilm(data);
             }

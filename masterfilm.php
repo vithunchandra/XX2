@@ -29,6 +29,7 @@
             <button name="masterUser" type="submit" class="btn btn-outline-primary">Master User</button>
             <button name="masterFilm" type="submit" class="btn btn-primary">Master Film</button>
             <button name="masterSchedule" type="submit" class="btn btn-outline-primary">Master Schedule</button>
+            <button name="masterReport" type="submit" class="btn btn-outline-primary">Master Report</button>
         </form>
 
         <div class="container-fluid px-3">

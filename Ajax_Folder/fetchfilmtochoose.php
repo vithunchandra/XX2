@@ -3,9 +3,10 @@
     
     $id_theater = $_POST['id_theater'];
     $id_session = $_POST['id_session'];
+    $currentDate = toDate($_POST['date']);
 
     $filmData = fetchData("SELECT id_film as id, nama_film AS nama, sinopsis, image_path AS image, trailer_link AS trailer, 
-    start_date AS start, end_date AS end, status FROM film");
+    start_date AS start, end_date AS end, status FROM film WHERE '$currentDate' >= start_date AND '$currentDate' <= end_date");
 ?>
 
 <h1 class="display-6">Choose Film</h1>

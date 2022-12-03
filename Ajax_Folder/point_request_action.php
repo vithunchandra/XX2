@@ -7,7 +7,7 @@
 
     if($status){
         $memberID = fetchScalar("SELECT id_member FROM point_request WHERE id_request = '$idPointRequest'");
-        crud("UPDATE member SET saldo = saldo + '' WHERE id_member = '$memberID'");
+        crud("UPDATE member SET saldo = saldo + $jumlah WHERE id_member = '$memberID'");
     }
     crud("UPDATE point_request SET status = 0 WHERE id_request = '$idPointRequest'");
 ?>

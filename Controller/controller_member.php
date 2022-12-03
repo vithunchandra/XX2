@@ -64,5 +64,7 @@
         header("Location: ../admin.php");
     }elseif(isset($_POST['masterSchedule'])){
         header("Location: ../masterschedule.php");
+    }elseif(isset($_POST['masterReport'])){
+        header("Location: ../master_report.php");
     }
 ?>
