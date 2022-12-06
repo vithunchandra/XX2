@@ -347,8 +347,10 @@
   }
 
   function buy() {
-    var uang = parseInt(document.getElementById('point').innerHTML.split(":")[1]);
-    var harga = parseInt(document.getElementById('total').innerHTML);
+    var uang = parseInt(document.getElementById('point').innerHTML.split(":")[1].replaceAll(",",""));
+    var harga = parseInt(document.getElementById('total').innerHTML.replaceAll(",",""));
+    //console.log(document.getElementById('point').innerHTML.split(":")[1] + " " + uang + " " + harga);
+    //console.log(document.getElementById('point').innerHTML.split(":")[1].replaceAll(",",""));
     
     if(uang >= harga) {
       theater = document.getElementById('theater').value;
