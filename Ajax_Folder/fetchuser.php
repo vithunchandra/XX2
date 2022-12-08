@@ -4,7 +4,7 @@
     $userData = fetchData("SELECT * FROM member");
 ?>
 
-<thead>
+<thead class="tbl">
     <tr>
         <th>No</th>
         <th>Username</th>
@@ -14,7 +14,7 @@
         <th>Action</th>
     </tr>
 </thead>
-<tbody>
+<tbody class="blue">
     <?php
         $counter = 1;
         foreach($userData as $value){

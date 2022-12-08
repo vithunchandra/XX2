@@ -540,13 +540,16 @@ a:hover
 }    
 .blue
 {
-  
-  
-  background-color: #e82828;
+  border: 1px solid #15375e;
+  background-color: #3c6b9c;
 }
 .tbl
 {
   background-color: #004996;
-  
+  border: 1px solid #0e325c;
+}
+.myback
+{
+  background-color: #444;
 }
 
