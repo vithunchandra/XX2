@@ -49,7 +49,7 @@
         $jumlah = $_GET['jumlah'];
         $user = $_GET['id_user'];
         $sql = "INSERT INTO `point_request`(`id_member`, `jumlah_point`, `status`) 
-        VALUES ($user,$jumlah,0)";
+        VALUES ($user,$jumlah,1)";
         $conn->query($sql);
         echo "order sucess!";
     }

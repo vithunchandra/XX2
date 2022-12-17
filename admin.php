@@ -82,7 +82,6 @@
             }
 
             function acceptPointRequest(){
-                alert("Test");
                 var data = `id_point_request=${this.value}&value=1`;
                 var crudObject = new CrudObject("Ajax_Folder/point_request_action.php", data);
                 
