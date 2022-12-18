@@ -5,8 +5,9 @@
     $date = $_POST['date'];
     $queryDate = !empty($date) ? " AND s.broadcast_date = '$date' " : "";
 
-    $query = "SELECT COUNT(f.id_film) AS jumlah, t.harga AS harga, 
-    COUNT(f.id_film)*t.harga AS total_penjualan, f.start_date AS start_date, f.end_date AS end_date FROM h_movie hm 
+
+    $query = "SELECT COUNT(f.id_film) AS jumlah, dm.harga AS harga, 
+    SUM(dm.harga) AS total_penjualan, f.start_date AS start_date, f.end_date AS end_date FROM h_movie hm 
     JOIN d_movie dm ON dm.id_nota = hm.id_nota JOIN theater_schedule ts ON ts.id_theater_schedule = hm.id_theater_schedule JOIN theater t ON t.id_theater = ts.id_theater
     JOIN schedule s ON s.id_schedule = ts.id_schedule JOIN film f ON f.id_film = s.id_film WHERE 1 = 1 AND f.id_film = '$id_film'".$queryDate;
 
@@ -36,13 +37,17 @@
         Data Not Found
     <?php } ?>
 </td>
-<td>
-    <?php if(!empty($data)){ ?>
-        <?= "Rp. ".number_format($data['harga'], 0, ',', '.') ?>
+<!-- <td>
+    <?php if(!empty($data)){ 
+        if(!empty($date)){ ?>
+            <?= "Rp. ".number_format($data['harga'], 0, ',', '.') ?>
+        <?php }else{ ?>
+            Harganya campuran
+        <?php } ?>
     <?php }else{ ?>
         Data Not Found
     <?php } ?>
-</td>
+</td> -->
 <td>
     <?php if(!empty($data)){ ?>
         <?= "Rp. ".number_format($data['total_penjualan'], 0, ',', '.') ?>
