@@ -157,7 +157,7 @@
               </div>
               
               <div id = "pilih_sesi" class="col-md-6 form-group mt-3 mt-md-0">
-                <select id="sesi" onchange="update_pilih_sesi()"  class="form-select text-white bg-dark" aria-label="Default select example">
+                <select id="sesi" onchange="resetNumber()"  class="form-select text-white bg-dark" aria-label="Default select example">
                   <option selected>Available Session</option>
                 </select>
               </div>
@@ -267,7 +267,7 @@
           //   <option selected>Available Session</option>
           // </select>
           tempHTML = "";
-          tempHTML += '<select id="sesi" onchange="update_pilih_sesi()"  class="form-select text-white bg-dark" aria-label="Default select example">';
+          tempHTML += '<select id="sesi" onchange="resetNumber()"  class="form-select text-white bg-dark" aria-label="Default select example">';
 
           for(var i = 0;i < rows.length;i++) {
             tempHTML += "<option value = "+rows[i]['id']+">"+rows[i]['starts'] + " - " + rows[i]['ends'] +"</option>";
@@ -282,6 +282,12 @@
     xhttp.send();
   }
 
+  function resetNumber() {
+    document.getElementById('av_seat').innerHTML = "";
+    jumlah_tiket = 0;
+    document.getElementById('jum_tiket').innerHTML = 0;
+    document.getElementById('total').innerHTML = 0;
+  }
       
   
   function show_seat() {
