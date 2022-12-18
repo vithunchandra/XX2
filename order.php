@@ -291,6 +291,7 @@
       
   
   function show_seat() {
+    resetNumber();
     choosen_seat = [];
     jumlah_tiket = 0;
 
