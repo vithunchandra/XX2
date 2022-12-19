@@ -24,6 +24,7 @@
   <title>Document</title>
 </head>
 <body class="backlog">
+<h1 class="loglogo">XX2 Chinema</h1>
 <div class="login">
   <form action="Controller/controller_member.php" method = "POST">
     <h1 class="logtit">Login</h1>
