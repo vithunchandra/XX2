@@ -315,9 +315,9 @@
             textNow = String.fromCharCode(65 + i);
             for(var j = 0;j < seat[i].length;j++) {
               if(seat[i][j] == 1) {
-                tempHTML = tempHTML + "<button class='btn rounded-0 btn-light' onclick = 'choose_seat(this)' value = '"+i+";"+j+"'>"+ textNow+j +"</button>";
+                tempHTML = tempHTML + "<div onclick = 'choose_seat(this)' ><button class='btn rounded-0 btn-light' value = '"+i+";"+j+"'>"+ textNow+j +"</button></div>";
               } else {
-                tempHTML = tempHTML + "<button disabled class='btn rounded-0 btn-light' onclick = 'choose_seat(this)' value = '"+i+";"+j+"'>"+ textNow+j +"</button>";
+                tempHTML = tempHTML + "<div onclick = 'choose_seat(this)'><button disabled class='btn rounded-0 btn-light' value = '"+i+";"+j+"'>"+ textNow+j +"</button></div>";
               }
               
             }
@@ -332,7 +332,8 @@
     xhttp.send();
   }
   
-  function choose_seat(e) {
+  function choose_seat(evt) {
+    e = evt.firstElementChild;
     if(!e.disabled) {
       jumlah_tiket = jumlah_tiket + 1;
       document.getElementById('jum_tiket').innerHTML = jumlah_tiket;  
@@ -353,6 +354,7 @@
     }else{
       alert("Kursi sudah terisi");
     }
+    
   }
 
   function buy() {

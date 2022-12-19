@@ -83,7 +83,8 @@
         if(isset($_SESSION['login'])) {
             echo '<a href = "#"><button class="btn btn-info" data-toggle="modal" data-target="#exampleModal">Top Up</button></a>';
             echo '<a href = "#"><form action = "Controller/controller_member.php" method = "POST"><button class="btn btn-info" name = "logout" type = "submit">logout</button></form></a>';
-        } else {
+            
+          } else {
             echo '<a href = "login.php"><button class="btn btn-info">Login</button></a>';
         }
         ?>
@@ -101,6 +102,11 @@
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-6 text-center">
+          <?php 
+            if(isset($_SESSION['login'])) {
+              echo '<h2>'. $userData['nama_member'] .'</h2>';
+            } 
+          ?>
           <h2>Welcome To XX2</h2>
           <h3 id = 'title'></h3>
           <input placeholder="Search Title" onkeyup="search()" id = "search_key" type="text">

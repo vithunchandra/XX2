@@ -2,8 +2,12 @@
     require('connect.php');
 
     if(isset($_POST['register'])) {
+
         if($_POST['nama'] == "" || $_POST['email'] == "" || $_POST['user'] == "" || $_POST['pass'] == "" ) {
             header("Location:../register.php?err='Pastikan Seluruh Field Telah Terisi!'");
+        }
+        else if($_POST['pass'] != $_POST['confpass']) {
+            header("Location:../register.php?err='Password dan confirm password harus sama!'");
         }
         else {
             $p = md5($_POST['pass']);

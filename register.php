@@ -22,6 +22,7 @@
     email : <input class="form-control mini" name = "email" type="email"> <br>
     user : <input class="form-control mini" name = "user" type="text"> <br>
     pass : <input class="form-control mini" name = "pass" type="password">  <br>
+    confirm pass : <input class="form-control mini" name = "confpass" type="password">  <br>
     
     <div class=""><button name = 'register' type="submit" class="btn mx-auto btn-primary reg2">Register</button></div>
     <a href="login.php" class="nounder"> already have account ? Login</a>
