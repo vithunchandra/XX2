@@ -15,10 +15,10 @@
     <input type="text" class="form-control" id="usernameUpdate" value="<?= $userData['user'] ?>" placeholder="Username">
     <label for="usernameUpdate">Username</label>
 </div>
-<div class="form-floating mb-3">
+<!-- <div class="form-floating mb-3">
     <input type="text" class="form-control" id="passwordUpdate" value="<?= $userData['pass'] ?>" placeholder="Password">
     <label for="passwordUpdate">Password</label>
-</div>
+</div> -->
 <div class="form-floating mb-3">
     <input type="text" class="form-control" id="nameUpdate" value="<?= $userData['nama_member'] ?>" placeholder="Nama">
     <label for="nameUpdate">Nama</label>
