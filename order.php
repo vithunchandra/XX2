@@ -350,6 +350,8 @@
 
       xhttp.open("GET", "Controller/controller_theater.php?get_theater_price=1&theater=" +  document.getElementById('theater').value);
       xhttp.send();
+    }else{
+      alert("Kursi sudah terisi");
     }
   }
 

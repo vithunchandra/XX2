@@ -6,8 +6,9 @@
             header("Location:../register.php?err='Pastikan Seluruh Field Telah Terisi!'");
         }
         else {
+            $p = md5($_POST['pass']);
             $sql = "INSERT INTO `member`( `nama_member`, `email`, `user`, `pass`, `saldo`) 
-            VALUES ('".$_POST['nama']."','".$_POST['email']."','".$_POST['user']."','".$_POST['pass']."',0)";
+            VALUES ('".$_POST['nama']."','".$_POST['email']."','".$_POST['user']."','".$p."',0)";
             $conn->query($sql);
             
             header("Location:../login.php");
@@ -15,13 +16,16 @@
     }
 
     if(isset($_POST['login'])) {
+        
         if($_POST['user'] == 'admin' && $_POST['pass']== 'admin') {
             $_SESSION['login'] = "admin";
             header("Location:../admin.php");
         } 
         else {
+            $p = $_POST['pass'];
+            $p = md5($p);
             $sql = "SELECT * FROM `member` 
-            WHERE (user = '".$_POST['user']."' or email = '" .$_POST['user']. "') and pass = '".$_POST['pass']."' and status = 1 ";
+            WHERE (user = '".$_POST['user']."' or email = '" .$_POST['user']. "') and pass = '".$p."' and status = 1 ";
             
             $result = $conn->query($sql);
             
